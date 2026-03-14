@@ -131,3 +131,42 @@
   );
   transform: translateY(-2px);
 }
+
+/* About Section */
+.about {
+  padding: 6rem 2rem;
+  background-color: #f9fafb;
+}
+
+.about-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.profile-img {
+  flex: 1;
+  align-items: center;
+}
+.profile-img img {
+  width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.about-text {
+  flex: 1;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  font-weight: 700;
+  background: linear-gradient(
+    to right,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
+}
