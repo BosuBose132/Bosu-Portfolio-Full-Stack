@@ -10,6 +10,7 @@
   --text-color: #1f2937;
   --gradient-start: #4f46e5;
   --gradient-end: #7c3aed;
+  --light-color: #f3f4f6;
 }
 
 .navbar {
@@ -169,4 +170,39 @@
     var(--gradient-start),
     var(--gradient-end)
   );
+  display: inline-block;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.skills {
+  padding: 6rem 2rem;
+  background: var(--light-color);
+}
+
+.skills-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.skills-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.skills-card {
+  flex: 1;
+  min-width: 250px;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+.skills-card i {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
 }
