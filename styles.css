@@ -316,3 +316,21 @@
   );
   transform: translateY(-2px);
 }
+
+.footer {
+  background: var(--text-color);
+  text-align: center;
+  padding: 2rem;
+  color: #f9fafb;
+}
+
+.social-links {
+  margin-top: 0 0.5rem;
+  color: white;
+  font-style: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--primary-color);
+}
