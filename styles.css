@@ -325,12 +325,58 @@
 }
 
 .social-links {
-  margin-top: 0 0.5rem;
+  margin-top: 1rem;
+}
+
+.social-links a {
   color: white;
+  margin: 0 0.5rem;
   font-style: 1.5rem;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
 .social-links a:hover {
   color: var(--primary-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 780px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    background: white;
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .menu-btn {
+    display: block;
+  }
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .heaader-text h1 {
+    font-size: 2.5rem;
+  }
+  .skills-card {
+    min-width: 200px;
+  }
+}
+@media (max-width: 1024px) {
+  .work-card {
+    flex: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .works-grid {
+    justify-content: center;
+  }
 }
