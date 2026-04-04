@@ -359,7 +359,7 @@ a {
 .social-links a {
   color: white;
   margin: 0 0.5rem;
-  font-style: 1.5rem;
+  font-size: 1.5rem;
   transition: color 0.3s;
 }
 
@@ -391,7 +391,7 @@ a {
     flex-direction: column;
     text-align: center;
   }
-  .heaader-text h1 {
+  .header-text h1 {
     font-size: 2.5rem;
   }
   .skills-card {
