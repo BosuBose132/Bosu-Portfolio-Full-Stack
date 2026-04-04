@@ -1,12 +1,27 @@
+body {
+  color: var(--text-color);
+  line-height: 1.6;
+  background-color: #ffffff;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
 }
 :root {
   --primary-color: #4f46e5;
-  --seconndary-color: #4f46e5;
+  --secondary-color: #4f46e5;
   --text-color: #1f2937;
   --gradient-start: #4f46e5;
   --gradient-end: #7c3aed;
