@@ -86,6 +86,43 @@ a {
   color: var(--text-color);
   display: none;
 }
+/* hero Styles */
+.hero-intro {
+  margin-bottom: 1rem;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  min-height: 2.5rem;
+}
+
+.intro-static {
+  font-weight: 500;
+}
+
+#typed-text {
+  display: inline-block;
+  font-weight: 500;
+}
+
+.typed-cursor {
+  display: inline-block;
+  margin-left: 0.1rem;
+  color: #ffffff;
+  font-weight: 600;
+  animation: blinkCursor 1s infinite;
+}
+
+@keyframes blinkCursor {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
 
 /* header section */
 .header {
@@ -396,6 +433,10 @@ a {
   }
   .skills-card {
     min-width: 200px;
+  }
+  .hero-intro {
+    text-align: center;
+    min-height: 3.5rem;
   }
 }
 @media (max-width: 1024px) {

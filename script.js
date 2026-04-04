@@ -2,6 +2,16 @@
 const menuBtn = document.querySelector(".menu-btn");
 const navLinks = document.querySelector(".nav-links");
 const navItems = document.querySelectorAll(".nav-links a");
+const typedText = document.querySelector("#typed-text");
+
+const typingPhrases = [
+  "a Full Stack Developer",
+  "an MS graduate student from Indiana Institute of Technology",
+  "an ex-Software Development Intern at Medical Informatics Engineering",
+  "an ex-Associate Software Engineer at Virtusa",
+  "a quick learner",
+  "an observer",
+];
 
 if (menuBtn && navLinks) {
   menuBtn.addEventListener("click", () => {
@@ -14,3 +24,36 @@ if (menuBtn && navLinks) {
     });
   });
 }
+//Typewriting part in hero section
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeEffect() {
+  if (!typedText) return;
+
+  const currentPhrase = typingPhrases[phraseIndex];
+
+  if (isDeleting) {
+    typedText.textContent = currentPhrase.substring(0, charIndex - 1);
+    charIndex--;
+  } else {
+    typedText.textContent = currentPhrase.substring(0, charIndex + 1);
+    charIndex++;
+  }
+
+  let typingSpeed = isDeleting ? 28 : 55;
+
+  if (!isDeleting && charIndex === currentPhrase.length) {
+    typingSpeed = 900;
+    isDeleting = true;
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    phraseIndex = (phraseIndex + 1) % typingPhrases.length;
+    typingSpeed = 140;
+  }
+
+  setTimeout(typeEffect, typingSpeed);
+}
+
+typeEffect();
