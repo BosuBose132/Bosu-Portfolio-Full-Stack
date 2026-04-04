@@ -71,10 +71,8 @@ a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0, 95rem;
-  padding:
-    0,
-    5rem 0;
+  font-size: 0.95rem;
+  padding: 0.5rem 0;
 }
 .nav-links a:hover {
   color: var(--primary-color);
