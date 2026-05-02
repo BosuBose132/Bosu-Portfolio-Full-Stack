@@ -6,9 +6,8 @@ const typedText = document.querySelector("#typed-text");
 
 const typingPhrases = [
   "a Full Stack Developer",
-  "an MS graduate student from Indiana Institute of Technology",
-  "an ex-Software Development Intern at Medical Informatics Engineering",
-  "an ex-Associate Software Engineer at Virtusa",
+  "a Software Engineer",
+  "a problem solver",
   "a quick learner",
   "an observer",
 ];

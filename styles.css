@@ -32,6 +32,7 @@ a {
 }
 :root {
   --primary-color: #5f6f52;
+  --primary-dark: #47543d;
   --secondary-color: #8aa27a;
   --accent-color: #a9b388;
   --text-color: #1f2a1f;
@@ -111,25 +112,34 @@ a {
 /* hero Styles */
 .hero-intro {
   margin-bottom: 1rem;
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.95);
-  min-height: 2.5rem;
+  color: var(--text-color);
+  text-align: left;
+  line-height: 1.5;
+  min-height: calc(1.5em * 2);
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  column-gap: 0.15rem;
 }
 
 .intro-static {
   font-weight: 500;
 }
 
-#typed-text {
-  display: inline-block;
-  font-weight: 500;
+.typed-dynamic {
+  display: inline;
+  color: var(--primary-dark, #47543d);
 }
 
-.typed-cursor {
-  display: inline-block;
-  margin-left: 0.1rem;
-  color: #ffffff;
+#typed-text {
+  display: inline;
+}
+
+.typed-dynamic::after {
+  content: "|";
+  color: var(--primary-color);
   font-weight: 600;
   animation: blinkCursor 1s infinite;
 }
@@ -210,12 +220,22 @@ a {
   box-shadow: var(--shadow-sm);
 }
 
-.hero-left h1 {
-  font-size: clamp(3rem, 6vw, 5.4rem);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  margin-bottom: 0.75rem;
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(2.4rem, 5vw, 4.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+}
+
+.hero-greeting {
   color: var(--text-color);
+}
+
+.hero-name {
+  color: var(--primary-color);
 }
 
 .hero-accent {
@@ -224,21 +244,24 @@ a {
 }
 
 .hero-intro {
-  margin-bottom: 1rem;
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
   font-weight: 500;
   color: var(--text-color);
-  min-height: 3rem;
+  min-height: 2.5rem;
   text-align: left;
+  line-height: 1.5;
 }
 
 .intro-static {
   color: var(--text-color);
+  margin-right: 0.2rem;
 }
 
 #typed-text {
   display: inline-block;
-  color: var(--primary-dark, #47543d);
+  color: var(--primary-dark);
 }
 
 .typed-cursor {
@@ -628,9 +651,14 @@ a {
     font-size: 3rem;
   }
 
+  .hero-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
   .hero-intro {
-    min-height: 3.5rem;
-    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    min-height: 3.2rem;
   }
 
   .hero-actions {
