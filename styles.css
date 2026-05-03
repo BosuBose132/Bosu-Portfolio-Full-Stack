@@ -223,8 +223,8 @@ a {
 .hero-title {
   display: flex;
   flex-direction: column;
-  font-size: clamp(2.4rem, 5vw, 4.25rem);
-  line-height: 1.08;
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  line-height: 1.05;
   letter-spacing: -0.03em;
   margin-bottom: 1.25rem;
   font-weight: 700;
@@ -292,6 +292,12 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.hero-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
 }
 
 .hero-visual-card {
