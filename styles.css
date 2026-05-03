@@ -424,31 +424,82 @@ a {
 
 /* About Section */
 
-.about,
-.works {
-  background-color: rgba(252, 251, 247, 0.78);
+.about {
+  padding: var(--section-spacing) 2rem;
+  background: rgba(252, 251, 247, 0.78);
 }
 
 .about-content {
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
   align-items: center;
   gap: 4rem;
 }
 
-.profile-img {
-  flex: 1;
+.about-text {
+  background: rgba(255, 253, 248, 0.72);
+  border: 1px solid rgba(216, 210, 196, 0.75);
+  border-radius: 2rem;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.about-label {
+  display: inline-block;
+  margin-bottom: 0.85rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(169, 179, 136, 0.16);
+  border: 1px solid rgba(216, 210, 196, 0.8);
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.about-heading {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  color: var(--text-color);
+}
+
+.about-text p {
+  color: #1f231d;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+.about-image-wrapper {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
-.profile-img img {
-  width: 100%;
-  max-width: 420px;
-  border-radius: 1rem;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+
+.about-image-circle {
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  padding: 0.9rem;
+  background: rgba(255, 253, 248, 0.85);
+  border: 1px solid rgba(216, 210, 196, 0.85);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.about-text {
-  flex: 1;
+
+.about-image-circle img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .section-title {
@@ -635,10 +686,30 @@ a {
   .menu-btn {
     display: block;
   }
-  .about-content {
-    flex-direction: column;
-    text-align: center;
+  .about {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
+
+  .about-text {
+    padding: 1.75rem;
+    border-radius: 1.5rem;
+  }
+
+  .about-heading {
+    font-size: 2rem;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .about-image-circle {
+    width: 260px;
+    height: 260px;
+  }
+
   .header-text h1 {
     font-size: 2.5rem;
   }
@@ -702,6 +773,15 @@ a {
   }
   .works-grid {
     justify-content: center;
+  }
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .about-image-circle {
+    width: 320px;
+    height: 320px;
   }
   .hero-layout {
     grid-template-columns: 1fr;
