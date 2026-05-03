@@ -512,40 +512,74 @@ a {
   -webkit-text-fill-color: transparent;
 }
 
-.skills,
-.contact {
+.skills {
+  padding: var(--section-spacing) 2rem;
   background: rgba(236, 231, 220, 0.55);
 }
 
 .skills-content {
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
 }
-.skills-grid {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 3rem;
+
+.skills-panel {
+  background: rgba(255, 253, 248, 0.78);
+  border: 1px solid rgba(216, 210, 196, 0.8);
+  border-radius: 1.75rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
 }
 
-.skills-card {
-  background: var(--surface-color);
-  padding: 2rem;
+.skills-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 1.5rem;
+  color: #161914;
+}
+
+.skills-heading i {
+  color: var(--primary-color);
+  font-size: 1.15em;
+}
+
+.skills-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 160px;
+  padding: 0.9rem 1.2rem;
+  background: rgba(255, 253, 248, 0.95);
+  border: 1px solid rgba(216, 210, 196, 0.9);
   border-radius: 1rem;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(216, 210, 196, 0.6);
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
-.skills-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+
+.skill-pill:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
-.skills-card i {
-  font-size: 2.5rem;
+
+.skill-pill i {
+  font-size: 1.45rem;
   color: var(--primary-color);
-  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.skill-pill span {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #1f231d;
 }
 
 .works-content {
@@ -713,8 +747,18 @@ a {
   .header-text h1 {
     font-size: 2.5rem;
   }
-  .skills-card {
-    min-width: 200px;
+  .skills-panel {
+    padding: 1.5rem;
+    border-radius: 1.4rem;
+  }
+
+  .skills-pills {
+    gap: 0.8rem;
+  }
+
+  .skill-pill {
+    width: 100%;
+    min-width: unset;
   }
   .hero-intro {
     text-align: center;
