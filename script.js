@@ -3,6 +3,8 @@ const menuBtn = document.querySelector(".menu-btn");
 const navLinks = document.querySelector(".nav-links");
 const navItems = document.querySelectorAll(".nav-links a");
 const typedText = document.querySelector("#typed-text");
+const projectsToggleBtn = document.querySelector("#projects-toggle-btn");
+const moreProjects = document.querySelector("#more-projects");
 
 const typingPhrases = [
   "a Full Stack Developer",
@@ -27,7 +29,18 @@ if (menuBtn && navLinks) {
 let phraseIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
+if (projectsToggleBtn && moreProjects) {
+  projectsToggleBtn.addEventListener("click", () => {
+    moreProjects.classList.toggle("show-projects");
+    projectsToggleBtn.classList.toggle("open");
 
+    if (moreProjects.classList.contains("show-projects")) {
+      projectsToggleBtn.textContent = "Show less";
+    } else {
+      projectsToggleBtn.textContent = "View all projects";
+    }
+  });
+}
 function typeEffect() {
   if (!typedText) return;
 

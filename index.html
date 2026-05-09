@@ -43,6 +43,10 @@
             <i class="fas fa-user"></i>
             About
           </a>
+          <a href="#experience">
+            <i class="fas fa-briefcase"></i>
+            Experience
+          </a>
           <a href="#skills">
             <i class="fas fa-code"></i>
             Skills
@@ -86,9 +90,9 @@
             </p>
 
             <p class="hero-description">
-              I build modern, scalable, and user-friendly web applications with
-              a strong focus on clean design, responsive development, and
-              meaningful user experience.
+              Full Stack Software Engineer focused on building scalable web
+              applications, AI-powered systems, and responsive user experiences
+              using React, Java, Node.js, and cloud technologies.
             </p>
 
             <div class="hero-actions">
@@ -177,6 +181,118 @@
             skills, building impactful projects, and preparing for full-time
             opportunities as a software engineer.
           </p>
+        </div>
+      </div>
+    </section>
+    <!-- Experience -->
+    <section id="experience" class="experience">
+      <div class="experience-content">
+        <div class="experience-panel">
+          <div class="experience-header">
+            <p class="experience-label">Experience</p>
+            <h2 class="experience-heading">Professional Journey</h2>
+          </div>
+
+          <div class="experience-timeline">
+            <!-- MIE -->
+            <article class="experience-card">
+              <div class="experience-top">
+                <div class="experience-company-icon">
+                  <i class="fas fa-hospital"></i>
+                </div>
+
+                <div class="experience-meta">
+                  <h3>Software Development Intern</h3>
+                  <p class="experience-company">
+                    Medical Informatics Engineering
+                  </p>
+                </div>
+
+                <span class="experience-year">2025 - Present</span>
+              </div>
+
+              <p class="experience-description">
+                Worked on an AI-powered Visitor Management System focused on
+                automating visitor check-in workflows using OCR, real-time
+                processing, and responsive kiosk experiences.
+              </p>
+
+              <div class="experience-highlights">
+                <div class="experience-highlight">
+                  <span>10,000+</span>
+                  <p>Monthly Visitor Records</p>
+                </div>
+
+                <div class="experience-highlight">
+                  <span>45%</span>
+                  <p>Reduction in Manual Verification</p>
+                </div>
+
+                <div class="experience-highlight">
+                  <span>30%</span>
+                  <p>Improved Concurrent Workflow Performance</p>
+                </div>
+              </div>
+
+              <div class="experience-tags">
+                <span>React.js</span>
+                <span>Meteor.js</span>
+                <span>MongoDB</span>
+                <span>OCR</span>
+                <span>OpenCV</span>
+                <span>AWS</span>
+              </div>
+            </article>
+
+            <!-- Virtusa -->
+            <article class="experience-card">
+              <div class="experience-top">
+                <div class="experience-company-icon">
+                  <i class="fas fa-building"></i>
+                </div>
+
+                <div class="experience-meta">
+                  <h3>Software Engineer</h3>
+                  <p class="experience-company">Virtusa Consulting Services</p>
+                </div>
+
+                <span class="experience-year">2021 - 2024</span>
+              </div>
+
+              <p class="experience-description">
+                Developed scalable enterprise backend systems and RESTful APIs
+                for healthcare and banking environments while improving
+                application performance, database efficiency, and release
+                quality.
+              </p>
+
+              <div class="experience-highlights">
+                <div class="experience-highlight">
+                  <span>40%</span>
+                  <p>Improved API Response Performance</p>
+                </div>
+
+                <div class="experience-highlight">
+                  <span>35%</span>
+                  <p>Operational Workflow Efficiency</p>
+                </div>
+
+                <div class="experience-highlight">
+                  <span>20%</span>
+                  <p>Reduction in Regression Defects</p>
+                </div>
+              </div>
+
+              <div class="experience-tags">
+                <span>Java</span>
+                <span>Spring Boot</span>
+                <span>REST APIs</span>
+                <span>MySQL</span>
+                <span>AWS</span>
+                <span>CI/CD</span>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -290,27 +406,48 @@
           <div class="projects-header">
             <div>
               <p class="projects-label">Projects</p>
-              <h2 class="projects-heading">Things I’ve built</h2>
+              <h2 class="projects-heading">Featured Work</h2>
             </div>
           </div>
 
-          <div class="projects-grid">
-            <!-- Vida Sana -->
-            <article class="project-card project-card-featured">
+          <!-- Always visible projects -->
+          <div class="projects-grid projects-grid-visible">
+            <!-- VistaMate -->
+            <article class="project-card">
               <div class="project-image">
-                <img
-                  src="Screenshot 2026-04-26 at 11.26.42 PM.png"
-                  alt="Vida Sana project preview"
-                />
+                <img src="Vistamate.jpg" alt="VistaMate project preview" />
+              </div>
+
+              <div class="project-body">
+                <h3>VistaMate</h3>
+                <p>
+                  A smart visitor management system that streamlines visitor
+                  check-in, tracking, and administrative workflows with a modern
+                  full-stack interface.
+                </p>
+
+                <div class="project-tags">
+                  <span>React.js</span>
+                  <span>Node.js</span>
+                  <span>Meteor.js</span>
+                  <span>MongoDB</span>
+                  <span>OCR</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Vida Sana -->
+            <article class="project-card">
+              <div class="project-image">
+                <img src="Vidasana.png" alt="Vida Sana project preview" />
               </div>
 
               <div class="project-body">
                 <h3>Vida Sana</h3>
                 <p>
-                  A vegan nutrition guidance web application designed to help
-                  users transition into a plant-based lifestyle through calorie
-                  calculation, nutrient awareness, personalized food
-                  recommendations, and vegan food replacements.
+                  A vegan nutrition guidance web application focused on calorie
+                  calculation, nutrient awareness, plant-based food suggestions,
+                  and vegan replacements. :contentReference[oaicite:0]{index=0}
                 </p>
 
                 <div class="project-tags">
@@ -322,50 +459,39 @@
                   <span>Express.js</span>
                   <span>MySQL</span>
                 </div>
-
-                <div class="project-links">
-                  <a href="#" class="project-btn primary-project-btn">Live</a>
-                  <a href="#" class="project-btn secondary-project-btn"
-                    >GitHub</a
-                  >
-                </div>
               </div>
             </article>
-
-            <!-- VistaMate -->
+            <!-- Shvasa -->
             <article class="project-card">
               <div class="project-image">
-                <img
-                  src="profile-picture.JPG"
-                  alt="VistaMate project preview"
-                />
+                <img src="Shvasa.png" alt="Shvasa app preview" />
               </div>
 
               <div class="project-body">
-                <h3>VistaMate</h3>
+                <h3>Shvasa</h3>
                 <p>
-                  A smart visitor management system that streamlines check-in,
-                  visitor tracking, and admin workflows with a modern interface
-                  and full-stack development approach.
+                  A mobile-first anxiety relief application designed for
+                  emotional first aid, helping users calm down quickly through
+                  breathing, grounding, support prompts, and interactive calming
+                  flows.
                 </p>
 
                 <div class="project-tags">
-                  <span>React.js</span>
+                  <span>HTML</span>
+                  <span>JavaScript</span>
+                  <span>Tailwind CSS</span>
+                  <span>Three.js</span>
+                  <span>Vite</span>
                   <span>Node.js</span>
-                  <span>Meteor.js</span>
+                  <span>Express.js</span>
                   <span>MongoDB</span>
-                  <span>OCR</span>
-                </div>
-
-                <div class="project-links">
-                  <a href="#" class="project-btn primary-project-btn">Live</a>
-                  <a href="#" class="project-btn secondary-project-btn"
-                    >GitHub</a
-                  >
                 </div>
               </div>
             </article>
+          </div>
 
+          <!-- Hidden initially -->
+          <div class="projects-grid projects-grid-hidden" id="more-projects">
             <!-- FirstCry -->
             <article class="project-card">
               <div class="project-image project-placeholder">
@@ -374,20 +500,10 @@
 
               <div class="project-body">
                 <h3>FirstCry</h3>
-                <p>
-                  Project details will be updated here. This card is kept as a
-                  placeholder so the section structure is ready.
-                </p>
+                <p>Project details will be added here.</p>
 
                 <div class="project-tags">
                   <span>To Update</span>
-                </div>
-
-                <div class="project-links">
-                  <a href="#" class="project-btn primary-project-btn">Live</a>
-                  <a href="#" class="project-btn secondary-project-btn"
-                    >GitHub</a
-                  >
                 </div>
               </div>
             </article>
@@ -405,28 +521,13 @@
                 <h3>Guess My Number</h3>
                 <p>
                   A fun and interactive number guessing game built with
-                  JavaScript, focused on DOM manipulation, user interaction, and
-                  game logic.
+                  JavaScript, focused on DOM manipulation and game logic.
                 </p>
 
                 <div class="project-tags">
                   <span>HTML</span>
                   <span>CSS</span>
                   <span>JavaScript</span>
-                </div>
-
-                <div class="project-links">
-                  <a
-                    href="https://bosubose132.github.io/Guess-my-number-js/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-btn primary-project-btn"
-                  >
-                    Live
-                  </a>
-                  <a href="#" class="project-btn secondary-project-btn"
-                    >GitHub</a
-                  >
                 </div>
               </div>
             </article>
@@ -441,7 +542,7 @@
                 <h3>Pig Game</h3>
                 <p>
                   A JavaScript-based dice game that demonstrates score handling,
-                  event-driven interactions, and dynamic UI updates.
+                  event-driven interaction, and dynamic UI updates.
                 </p>
 
                 <div class="project-tags">
@@ -449,56 +550,90 @@
                   <span>CSS</span>
                   <span>JavaScript</span>
                 </div>
+              </div>
+            </article>
+          </div>
+          <div class="projects-toggle-wrap">
+            <button
+              class="projects-toggle-btn"
+              id="projects-toggle-btn"
+              type="button"
+            >
+              View all projects
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Education -->
+    <section id="education" class="education">
+      <div class="education-content">
+        <div class="education-panel">
+          <div class="education-header">
+            <p class="education-label">Education</p>
+            <h2 class="education-heading">Academic Journey</h2>
+          </div>
 
-                <div class="project-links">
-                  <a
-                    href="https://bosubose132.github.io/Pig-game/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-btn primary-project-btn"
-                  >
-                    Live
-                  </a>
-                  <a href="#" class="project-btn secondary-project-btn"
-                    >GitHub</a
-                  >
+          <div class="education-grid">
+            <!-- Masters -->
+            <article class="education-card">
+              <div class="education-top">
+                <div class="education-icon">
+                  <i class="fas fa-graduation-cap"></i>
                 </div>
+
+                <div class="education-meta">
+                  <h3>Master of Science in Information Systems</h3>
+                  <p class="education-school">
+                    Indiana Institute of Technology
+                  </p>
+                </div>
+
+                <span class="education-year">2024 - 2026</span>
+              </div>
+
+              <p class="education-description">
+                Focused on scalable software systems, database management,
+                system design, and modern web technologies while building
+                real-world full-stack applications.
+              </p>
+
+              <div class="education-tags">
+                <span>System Design</span>
+                <span>DBMS</span>
+                <span>Project Management</span>
+                <span>Data Visualization</span>
               </div>
             </article>
 
-            <!-- Shvasa -->
-            <article class="project-card">
-              <div class="project-image">
-                <img src="Shvasa-preview.png" alt="Shvasa app preview" />
+            <!-- Bachelors -->
+            <article class="education-card">
+              <div class="education-top">
+                <div class="education-icon">
+                  <i class="fas fa-university"></i>
+                </div>
+
+                <div class="education-meta">
+                  <h3>Bachelor of Engineering in Computer Engineering</h3>
+                  <p class="education-school">
+                    Pydah College of Engineering and Technology
+                  </p>
+                </div>
+
+                <span class="education-year">2015 - 2019</span>
               </div>
 
-              <div class="project-body">
-                <h3>Shvasa</h3>
-                <p>
-                  A mobile-first anxiety relief application built as emotional
-                  first aid for overwhelmed users, offering guided calming
-                  experiences like breathing, grounding, support prompts, and
-                  interactive sand therapy in a soft, premium interface.
-                </p>
+              <p class="education-description">
+                Built strong foundations in programming, networking, operating
+                systems, and data structures which shaped my software
+                engineering journey.
+              </p>
 
-                <div class="project-tags">
-                  <span>HTML</span>
-                  <span>JavaScript</span>
-                  <span>Tailwind CSS</span>
-                  <span>Three.js</span>
-                  <span>Vite</span>
-                  <span>Node.js</span>
-                  <span>Express.js</span>
-                  <span>MongoDB</span>
-                  <span>JWT</span>
-                </div>
-
-                <div class="project-links">
-                  <a href="#" class="project-btn primary-project-btn">Live</a>
-                  <a href="#" class="project-btn secondary-project-btn"
-                    >GitHub</a
-                  >
-                </div>
+              <div class="education-tags">
+                <span>Data Structures</span>
+                <span>Computer Networks</span>
+                <span>Unix</span>
+                <span>C Programming</span>
               </div>
             </article>
           </div>
