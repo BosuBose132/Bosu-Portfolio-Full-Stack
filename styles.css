@@ -4,15 +4,15 @@ body {
   background:
     radial-gradient(
       circle at top left,
-      rgba(169, 179, 136, 0.18),
+      rgba(138, 162, 122, 0.15),
       transparent 28%
     ),
     radial-gradient(
       circle at top right,
-      rgba(138, 162, 122, 0.12),
+      rgba(95, 111, 82, 0.1),
       transparent 24%
     ),
-    linear-gradient(to bottom, #f7f4ee 0%, #f3f1eb 100%);
+    linear-gradient(to bottom, #f7f1e6 0%, #fffaf0 100%);
 }
 
 img {
@@ -32,16 +32,21 @@ a {
 }
 :root {
   --primary-color: #5f6f52;
-  --primary-dark: #47543d;
+  --primary-dark: #2f3a2e;
   --secondary-color: #8aa27a;
-  --accent-color: #a9b388;
+  --accent-color: #d89b45;
+  --accent-soft: #f2c879;
   --text-color: #1f2a1f;
   --text-soft: #5f675b;
-  --light-color: #f3f1eb;
-  --white-color: #fffdf8;
-  --surface-color: #fcfbf7;
-  --surface-soft: #ece7dc;
-  --border-color: #d8d2c4;
+  --dark-navy: #111827;
+  --charcoal: #1f2933;
+  --light-color: #f7f1e6;
+  --white-color: #fffaf0;
+  --surface-color: #fffaf0;
+  --warm-bg: #f7f1e6;
+  --warm-surface: #fffaf0;
+  --surface-soft: #eee3d2;
+  --border-color: #d8cbb8;
   --shadow-sm: 0 8px 20px rgba(50, 60, 40, 0.06);
   --shadow-md: 0 16px 40px rgba(50, 60, 40, 0.1);
   --max-width: 1200px;
@@ -54,9 +59,9 @@ a {
   top: 0;
   width: 100%;
   padding: 1rem 2rem;
-  background-color: rgba(252, 251, 247, 0.88);
+  background-color: rgba(255, 250, 240, 0.88);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(216, 210, 196, 0.7);
+  border-bottom: 1px solid rgba(216, 203, 184, 0.7);
   box-shadow: 0 8px 24px rgba(50, 60, 40, 0.04);
   z-index: 1000;
 }
@@ -71,7 +76,7 @@ a {
 .logo {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--primary-dark, #47543d);
+  color: var(--primary-dark, #2f3a2e);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -194,15 +199,15 @@ a {
   background:
     radial-gradient(
       circle at top left,
-      rgba(169, 179, 136, 0.22),
+      rgba(138, 162, 122, 0.18),
       transparent 25%
     ),
     radial-gradient(
       circle at bottom right,
-      rgba(95, 111, 82, 0.16),
+      rgba(95, 111, 82, 0.12),
       transparent 28%
     ),
-    linear-gradient(180deg, #f7f4ee 0%, #f2efe7 100%);
+    linear-gradient(180deg, #f7f1e6 0%, #fffaf0 100%);
   color: var(--text-color);
 }
 
@@ -241,8 +246,8 @@ a {
   align-items: center;
   padding: 0.55rem 1rem;
   margin-bottom: 1.25rem;
-  background: rgba(255, 253, 248, 0.8);
-  border: 1px solid rgba(216, 210, 196, 0.9);
+  background: rgba(255, 250, 240, 0.8);
+  border: 1px solid rgba(216, 203, 184, 0.9);
   border-radius: 999px;
   color: var(--primary-color);
   font-weight: 600;
@@ -264,7 +269,7 @@ a {
 }
 
 .hero-name {
-  color: var(--primary-color);
+  color: #5f6f52;
 }
 
 .hero-accent {
@@ -290,7 +295,7 @@ a {
 
 #typed-text {
   display: inline-block;
-  color: var(--primary-dark);
+  color: #2f3a2e;
 }
 
 .typed-cursor {
@@ -330,9 +335,9 @@ a {
 }
 
 .hero-visual-card {
-  width: min(100%, 420px);
-  background: rgba(255, 253, 248, 0.72);
-  border: 1px solid rgba(216, 210, 196, 0.9);
+  width: min(100%, 370px);
+  background: rgba(255, 250, 240, 0.72);
+  border: 1px solid rgba(216, 203, 184, 0.9);
   border-radius: 2rem;
   box-shadow: var(--shadow-md);
   overflow: hidden;
@@ -341,19 +346,19 @@ a {
 
 .hero-card-main img {
   width: 100%;
-  height: 480px;
+  height: 420px;
   object-fit: cover;
   border-radius: 1.4rem;
 }
 
 .hero-floating-card {
   position: absolute;
-  background: rgba(255, 253, 248, 0.92);
-  border: 1px solid rgba(216, 210, 196, 0.95);
+  background: rgba(255, 250, 240, 0.92);
+  border: 1px solid rgba(216, 203, 184, 0.95);
   border-radius: 999px;
   padding: 0.85rem 1.1rem;
   box-shadow: var(--shadow-sm);
-  color: var(--primary-dark, #47543d);
+  color: var(--primary-dark, #2f3a2e);
   font-weight: 600;
 }
 
@@ -379,8 +384,8 @@ a {
 }
 
 .hero-stat {
-  background: rgba(255, 253, 248, 0.72);
-  border: 1px solid rgba(216, 210, 196, 0.9);
+  background: rgba(255, 250, 240, 0.72);
+  border: 1px solid rgba(216, 203, 184, 0.9);
   border-radius: 1.25rem;
   padding: 1.25rem;
   box-shadow: var(--shadow-sm);
@@ -389,7 +394,7 @@ a {
 .hero-stat h3 {
   font-size: 1.4rem;
   margin-bottom: 0.35rem;
-  color: var(--primary-dark, #47543d);
+  color: var(--primary-dark, #2f3a2e);
 }
 
 .hero-stat p {
@@ -413,7 +418,7 @@ a {
   display: inline-block;
   padding: 1rem 2.2rem;
   background: linear-gradient(to right, #5f6f52, #7b8f6a);
-  color: var(--white-color);
+  color: #fffaf0;
   border: none;
   border-radius: 999px;
   transition:
@@ -433,10 +438,10 @@ a {
 .secondary-btn {
   display: inline-block;
   padding: 1rem 2.2rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid #d8cbb8;
   border-radius: 999px;
   color: var(--text-color);
-  background: rgba(255, 253, 248, 0.72);
+  background: rgba(255, 250, 240, 0.72);
   font-weight: 600;
   transition:
     transform 0.3s ease,
@@ -447,7 +452,7 @@ a {
 
 .secondary-btn:hover {
   transform: translateY(-2px);
-  background-color: rgba(255, 253, 248, 0.95);
+  background-color: rgba(255, 250, 240, 0.95);
   box-shadow: var(--shadow-md);
 }
 
@@ -455,7 +460,7 @@ a {
 
 .about {
   padding: var(--section-spacing) 2rem;
-  background: rgba(252, 251, 247, 0.78);
+  background: rgba(255, 250, 240, 0.6);
 }
 
 .about-content {
@@ -468,8 +473,8 @@ a {
 }
 
 .about-text {
-  background: rgba(255, 253, 248, 0.72);
-  border: 1px solid rgba(216, 210, 196, 0.75);
+  background: rgba(255, 250, 240, 0.72);
+  border: 1px solid rgba(216, 203, 184, 0.75);
   border-radius: 2rem;
   padding: 2.5rem;
   box-shadow: var(--shadow-sm);
@@ -480,9 +485,9 @@ a {
   margin-bottom: 0.85rem;
   padding: 0.45rem 0.95rem;
   border-radius: 999px;
-  background: rgba(169, 179, 136, 0.16);
-  border: 1px solid rgba(216, 210, 196, 0.8);
-  color: var(--primary-color);
+  background: rgba(95, 111, 82, 0.1);
+  border: 1px solid rgba(216, 203, 184, 0.8);
+  color: #5f6f52;
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -516,8 +521,8 @@ a {
   height: 360px;
   border-radius: 50%;
   padding: 0.9rem;
-  background: rgba(255, 253, 248, 0.85);
-  border: 1px solid rgba(216, 210, 196, 0.85);
+  background: rgba(255, 250, 240, 0.85);
+  border: 1px solid rgba(216, 203, 184, 0.85);
   box-shadow: var(--shadow-md);
   display: flex;
   align-items: center;
@@ -535,7 +540,7 @@ a {
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   margin-bottom: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(to right, #47543d, #7b8f6a);
+  background: linear-gradient(to right, #2f3a2e, #7b8f6a);
   display: inline-block;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -543,7 +548,7 @@ a {
 
 .skills {
   padding: var(--section-spacing) 2rem;
-  background: rgba(236, 231, 220, 0.55);
+  background: rgba(238, 227, 210, 0.4);
 }
 
 .skills-content {
@@ -552,8 +557,8 @@ a {
 }
 
 .skills-panel {
-  background: rgba(255, 253, 248, 0.78);
-  border: 1px solid rgba(216, 210, 196, 0.8);
+  background: rgba(255, 250, 240, 0.78);
+  border: 1px solid rgba(216, 203, 184, 0.8);
   border-radius: 1.75rem;
   padding: 2rem;
   box-shadow: var(--shadow-sm);
@@ -585,8 +590,8 @@ a {
   gap: 0.75rem;
   min-width: 160px;
   padding: 0.9rem 1.2rem;
-  background: rgba(255, 253, 248, 0.95);
-  border: 1px solid rgba(216, 210, 196, 0.9);
+  background: rgba(255, 250, 240, 0.95);
+  border: 1px solid rgba(216, 203, 184, 0.9);
   border-radius: 1rem;
   box-shadow: var(--shadow-sm);
   transition:
@@ -613,7 +618,7 @@ a {
 
 .works {
   padding: var(--section-spacing) 2rem;
-  background: rgba(252, 251, 247, 0.78);
+  background: rgba(255, 250, 240, 0.6);
 }
 
 .works-content {
@@ -622,8 +627,8 @@ a {
 }
 
 .projects-panel {
-  background: rgba(255, 253, 248, 0.78);
-  border: 1px solid rgba(216, 210, 196, 0.8);
+  background: rgba(255, 250, 240, 0.78);
+  border: 1px solid rgba(216, 203, 184, 0.8);
   border-radius: 1.75rem;
   padding: 2rem;
   box-shadow: var(--shadow-sm);
@@ -638,9 +643,9 @@ a {
   margin-bottom: 0.85rem;
   padding: 0.45rem 0.95rem;
   border-radius: 999px;
-  background: rgba(169, 179, 136, 0.16);
-  border: 1px solid rgba(216, 210, 196, 0.8);
-  color: #3d4935;
+  background: rgba(95, 111, 82, 0.1);
+  border: 1px solid rgba(216, 203, 184, 0.8);
+  color: #5f6f52;
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -668,8 +673,8 @@ a {
 }
 
 .project-card {
-  background: rgba(255, 253, 248, 0.95);
-  border: 1px solid rgba(216, 210, 196, 0.9);
+  background: rgba(255, 250, 240, 0.95);
+  border: 1px solid rgba(216, 203, 184, 0.9);
   border-radius: 1.4rem;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -690,7 +695,7 @@ a {
   width: 100%;
   height: 170px;
   overflow: hidden;
-  background: #eef0e8;
+  background: #ede5d5;
   flex-shrink: 0;
 }
 
@@ -740,9 +745,9 @@ a {
 .project-tags span {
   padding: 0.38rem 0.72rem;
   border-radius: 999px;
-  background: rgba(169, 179, 136, 0.14);
-  border: 1px solid rgba(216, 210, 196, 0.7);
-  color: #3d4935;
+  background: rgba(95, 111, 82, 0.1);
+  border: 1px solid rgba(216, 203, 184, 0.7);
+  color: #5f6f52;
   font-size: 0.8rem;
   font-weight: 600;
 }
@@ -797,12 +802,12 @@ a {
 }
 .contact {
   padding: var(--section-spacing) 2rem;
-  background: rgba(236, 231, 220, 0.45);
+  background: rgba(238, 227, 210, 0.3);
 }
 
 .contact-panel {
-  background: rgba(255, 253, 248, 0.78);
-  border: 1px solid rgba(216, 210, 196, 0.8);
+  background: rgba(255, 250, 240, 0.78);
+  border: 1px solid rgba(216, 203, 184, 0.8);
   border-radius: 1.75rem;
   padding: 2rem;
   box-shadow: var(--shadow-sm);
@@ -817,9 +822,9 @@ a {
   margin-bottom: 0.85rem;
   padding: 0.45rem 0.95rem;
   border-radius: 999px;
-  background: rgba(169, 179, 136, 0.16);
-  border: 1px solid rgba(216, 210, 196, 0.8);
-  color: #3d4935;
+  background: rgba(95, 111, 82, 0.1);
+  border: 1px solid rgba(216, 203, 184, 0.8);
+  color: #5f6f52;
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -855,8 +860,8 @@ a {
   align-items: center;
   gap: 1rem;
   padding: 1.15rem;
-  background: rgba(255, 253, 248, 0.95);
-  border: 1px solid rgba(216, 210, 196, 0.9);
+  background: rgba(255, 250, 240, 0.95);
+  border: 1px solid rgba(216, 203, 184, 0.9);
   border-radius: 1.2rem;
   box-shadow: var(--shadow-sm);
   color: var(--text-color);
@@ -869,15 +874,15 @@ a {
 .contact-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
-  border-color: rgba(169, 179, 136, 0.7);
+  border-color: rgba(138, 162, 122, 0.5);
 }
 
 .contact-card i {
   width: 46px;
   height: 46px;
   border-radius: 1rem;
-  background: rgba(169, 179, 136, 0.14);
-  color: var(--primary-color);
+  background: rgba(95, 111, 82, 0.1);
+  color: #5f6f52;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -900,8 +905,8 @@ a {
 
 .contact-form {
   max-width: none;
-  background: rgba(255, 253, 248, 0.95);
-  border: 1px solid rgba(216, 210, 196, 0.9);
+  background: rgba(255, 250, 240, 0.95);
+  border: 1px solid rgba(216, 203, 184, 0.9);
   border-radius: 1.2rem;
   box-shadow: var(--shadow-sm);
 }
@@ -926,10 +931,10 @@ a {
 .form-group textarea {
   width: 100%;
   padding: 0.9rem 1rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid #d8cbb8;
   border-radius: 0.75rem;
   font-size: 1rem;
-  background: #fffdf8;
+  background: #fffaf0;
   color: var(--text-color);
   transition:
     border-color 0.3s ease,
@@ -939,10 +944,10 @@ a {
 }
 
 .footer {
-  background: #2f3a2e;
+  background: #1f2a1f;
   text-align: center;
   padding: 2rem;
-  color: #f8f5ee;
+  color: #fffaf0;
 }
 
 .social-links {
@@ -957,7 +962,7 @@ a {
 }
 
 .social-links a:hover {
-  color: #cdd8bf;
+  color: #d89b45;
 }
 .about-text p,
 .work-info p,
@@ -970,7 +975,7 @@ a {
 
 .education {
   padding: var(--section-spacing) 2rem;
-  background: rgba(236, 231, 220, 0.4);
+  background: rgba(238, 227, 210, 0.3);
 }
 
 .education-content {
@@ -979,8 +984,8 @@ a {
 }
 
 .education-panel {
-  background: rgba(255, 253, 248, 0.78);
-  border: 1px solid rgba(216, 210, 196, 0.8);
+  background: rgba(255, 250, 240, 0.78);
+  border: 1px solid rgba(216, 203, 184, 0.8);
   border-radius: 1.75rem;
   padding: 2rem;
   box-shadow: var(--shadow-sm);
@@ -995,9 +1000,9 @@ a {
   margin-bottom: 0.85rem;
   padding: 0.45rem 0.95rem;
   border-radius: 999px;
-  background: rgba(169, 179, 136, 0.16);
-  border: 1px solid rgba(216, 210, 196, 0.8);
-  color: #3d4935;
+  background: rgba(95, 111, 82, 0.1);
+  border: 1px solid rgba(216, 203, 184, 0.8);
+  color: #5f6f52;
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -1015,8 +1020,8 @@ a {
 }
 
 .education-card {
-  background: rgba(255, 253, 248, 0.95);
-  border: 1px solid rgba(216, 210, 196, 0.9);
+  background: rgba(255, 250, 240, 0.95);
+  border: 1px solid rgba(216, 203, 184, 0.9);
   border-radius: 1.5rem;
   padding: 1.8rem;
   box-shadow: var(--shadow-sm);
@@ -1041,7 +1046,7 @@ a {
   width: 60px;
   height: 60px;
   border-radius: 1rem;
-  background: rgba(169, 179, 136, 0.14);
+  background: rgba(95, 111, 82, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1050,7 +1055,7 @@ a {
 
 .education-icon i {
   font-size: 1.4rem;
-  color: var(--primary-color);
+  color: #5f6f52;
 }
 
 .education-meta {
@@ -1071,8 +1076,8 @@ a {
 .education-year {
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
-  background: rgba(169, 179, 136, 0.14);
-  color: var(--primary-dark);
+  background: rgba(95, 111, 82, 0.1);
+  color: #2f3a2e;
   font-size: 0.85rem;
   font-weight: 600;
   white-space: nowrap;
@@ -1093,9 +1098,9 @@ a {
 .education-tags span {
   padding: 0.38rem 0.8rem;
   border-radius: 999px;
-  background: rgba(169, 179, 136, 0.14);
-  border: 1px solid rgba(216, 210, 196, 0.7);
-  color: #3d4935;
+  background: rgba(95, 111, 82, 0.1);
+  border: 1px solid rgba(216, 203, 184, 0.7);
+  color: #5f6f52;
   font-size: 0.82rem;
   font-weight: 600;
 }
@@ -1103,7 +1108,7 @@ a {
 
 .experience {
   padding: var(--section-spacing) 2rem;
-  background: rgba(252, 251, 247, 0.78);
+  background: rgba(255, 250, 240, 0.6);
 }
 
 .experience-content {
@@ -1112,8 +1117,8 @@ a {
 }
 
 .experience-panel {
-  background: rgba(255, 253, 248, 0.78);
-  border: 1px solid rgba(216, 210, 196, 0.8);
+  background: rgba(255, 250, 240, 0.78);
+  border: 1px solid rgba(216, 203, 184, 0.8);
   border-radius: 1.75rem;
   padding: 2rem;
   box-shadow: var(--shadow-sm);
@@ -1128,9 +1133,9 @@ a {
   margin-bottom: 0.85rem;
   padding: 0.45rem 0.95rem;
   border-radius: 999px;
-  background: rgba(169, 179, 136, 0.16);
-  border: 1px solid rgba(216, 210, 196, 0.8);
-  color: #3d4935;
+  background: rgba(95, 111, 82, 0.1);
+  border: 1px solid rgba(216, 203, 184, 0.8);
+  color: #5f6f52;
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -1148,8 +1153,8 @@ a {
 }
 
 .experience-card {
-  background: rgba(255, 253, 248, 0.95);
-  border: 1px solid rgba(216, 210, 196, 0.9);
+  background: rgba(255, 250, 240, 0.95);
+  border: 1px solid rgba(216, 203, 184, 0.9);
   border-radius: 1.5rem;
   padding: 1.8rem;
   box-shadow: var(--shadow-sm);
@@ -1174,7 +1179,7 @@ a {
   width: 60px;
   height: 60px;
   border-radius: 1rem;
-  background: rgba(169, 179, 136, 0.14);
+  background: rgba(95, 111, 82, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1183,7 +1188,7 @@ a {
 
 .experience-company-icon i {
   font-size: 1.4rem;
-  color: var(--primary-color);
+  color: #5f6f52;
 }
 
 .experience-meta {
@@ -1204,8 +1209,8 @@ a {
 .experience-year {
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
-  background: rgba(169, 179, 136, 0.14);
-  color: var(--primary-dark);
+  background: rgba(95, 111, 82, 0.1);
+  color: #2f3a2e;
   font-size: 0.85rem;
   font-weight: 600;
   white-space: nowrap;
@@ -1225,8 +1230,8 @@ a {
 }
 
 .experience-highlight {
-  background: rgba(169, 179, 136, 0.08);
-  border: 1px solid rgba(216, 210, 196, 0.7);
+  background: rgba(95, 111, 82, 0.08);
+  border: 1px solid rgba(216, 203, 184, 0.7);
   border-radius: 1rem;
   padding: 1rem;
   text-align: center;
@@ -1236,7 +1241,7 @@ a {
   display: block;
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--primary-dark);
+  color: #2f3a2e;
   margin-bottom: 0.35rem;
 }
 
@@ -1255,9 +1260,9 @@ a {
 .experience-tags span {
   padding: 0.38rem 0.8rem;
   border-radius: 999px;
-  background: rgba(169, 179, 136, 0.14);
-  border: 1px solid rgba(216, 210, 196, 0.7);
-  color: #3d4935;
+  background: rgba(95, 111, 82, 0.1);
+  border: 1px solid rgba(216, 203, 184, 0.7);
+  color: #5f6f52;
   font-size: 0.82rem;
   font-weight: 600;
 }
