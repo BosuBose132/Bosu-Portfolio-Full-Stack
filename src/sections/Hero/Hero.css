@@ -1,12 +1,24 @@
 .hero {
   position: relative;
-  min-height: min(760px, 100vh);
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   padding-top: calc(var(--nav-height) + var(--space-6));
   padding-bottom: var(--space-12);
   scroll-margin-top: var(--nav-height);
   overflow: hidden;
+  background: #02050a;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: auto 0 0;
+  height: 18%;
+  pointer-events: none;
+  background: linear-gradient(transparent, var(--bg-main));
 }
 
 .hero__universe {
@@ -18,7 +30,7 @@
 
 .hero__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.18fr) minmax(360px, 0.82fr);
+  grid-template-columns: minmax(0, 1.14fr) minmax(360px, 0.86fr);
   gap: clamp(var(--space-8), 5vw, var(--space-16));
   align-items: center;
   width: 100%;
@@ -30,6 +42,20 @@
 .hero__content,
 .hero__actions {
   pointer-events: auto;
+}
+
+.hero__content {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero__content::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -5rem -5rem -4rem -4rem;
+  background: radial-gradient(ellipse at 45% 50%, rgba(2, 5, 10, 0.94) 0%, rgba(2, 5, 10, 0.7) 42%, transparent 72%);
+  pointer-events: none;
 }
 
 /* ---------------- Left ---------------- */
@@ -61,11 +87,12 @@
   letter-spacing: 0;
 }
 .hero__name {
-  background: linear-gradient(105deg, var(--text-primary) 30%, #ffd58b 100%);
+  background: linear-gradient(105deg, #ffffff 18%, #d9f1ff 64%, #9edaff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  text-shadow: 0 0 24px rgba(129, 211, 255, 0.12);
 }
 
 .hero__role {
@@ -148,7 +175,7 @@
 /* ---------------- Right (visual) ---------------- */
 .hero__visual {
   position: relative;
-  min-height: 400px;
+  min-height: 440px;
   pointer-events: none;
 }
 
@@ -224,6 +251,12 @@
 }
 
 @media (max-width: 560px) {
+  .hero {
+    min-height: auto;
+  }
+  .hero__content::before {
+    inset: -3rem -2rem;
+  }
   .hero__stats {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-4) 0;

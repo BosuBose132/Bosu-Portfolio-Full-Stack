@@ -1,4 +1,5 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useRef } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import { heroStats, profile } from "../../data/portfolioData";
 import { SocialLinks } from "../../components/ui/SocialLinks";
 import "./Hero.css";
@@ -10,11 +11,19 @@ const SystemArchitectureScene = lazy(() =>
 );
 
 export function Hero() {
+  const pointerRef = useRef({ x: 0, y: 0 });
+
+  const updatePointer = (event: ReactPointerEvent<HTMLElement>) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    pointerRef.current.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+    pointerRef.current.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1;
+  };
+
   return (
-    <section id="home" className="hero" aria-label="Introduction">
+    <section id="home" className="hero" aria-label="Introduction" onPointerMove={updatePointer} onPointerLeave={() => { pointerRef.current = { x: 0, y: 0 }; }}>
       <div className="hero__universe" aria-hidden="true">
         <Suspense fallback={null}>
-          <SystemArchitectureScene />
+          <SystemArchitectureScene pointerRef={pointerRef} />
         </Suspense>
       </div>
 
