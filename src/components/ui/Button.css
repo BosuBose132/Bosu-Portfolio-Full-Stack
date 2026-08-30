@@ -5,7 +5,8 @@
   gap: var(--space-2);
   font-weight: 600;
   font-size: var(--fs-small);
-  padding: 0.7rem 1.3rem;
+  min-height: 44px;
+  padding: 0.68rem 1.1rem;
   border-radius: var(--radius-md);
   border: 1px solid transparent;
   cursor: pointer;
@@ -23,12 +24,12 @@
 
 .btn--primary {
   background: var(--grad-action);
-  color: #1a1206;
-  box-shadow: 0 8px 24px -12px rgba(245, 158, 11, 0.6);
+  color: #171006;
+  box-shadow: 0 8px 20px -14px rgba(245, 158, 11, 0.62);
 }
 .btn--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px -12px rgba(245, 158, 11, 0.7);
+  box-shadow: 0 12px 24px -14px rgba(245, 158, 11, 0.7);
 }
 
 .btn--secondary {
@@ -37,8 +38,8 @@
   border-color: var(--border-subtle);
 }
 .btn--secondary:hover {
-  border-color: var(--border-cyan);
-  color: var(--cyan);
+  border-color: rgba(174, 185, 202, 0.28);
+  color: var(--text-primary);
   transform: translateY(-2px);
 }
 

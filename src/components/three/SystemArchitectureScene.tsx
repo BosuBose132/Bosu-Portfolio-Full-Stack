@@ -1,5 +1,5 @@
-import { Suspense, useEffect, useMemo, useRef } from "react";
-import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
+import { Suspense, useMemo, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
@@ -8,10 +8,9 @@ import "./SystemArchitectureScene.css";
 
 /* =====================================================================
    SystemArchitectureScene
-   Eight labelled nodes connected by data-flow edges, with request
-   packets flowing along them and a central "Build -> Test -> Deploy"
-   label. Each node can be grabbed and dragged; the edges and packets
-   follow it live.
+  A readable request path runs from Frontend through API, Backend,
+  Database, and Cloud. Supporting AI/OCR, Monitoring, and CI/CD nodes
+  show the production systems around that primary flow.
    ===================================================================== */
 
 type Accent = "cyan" | "blue" | "amber" | "green" | "orange";
@@ -31,44 +30,33 @@ interface Node {
 }
 
 const NODES: Node[] = [
-  { label: "Frontend", pos: [-3.1, 1.9, 0.3], accent: "cyan" },
-  { label: "API Gateway", pos: [-0.2, 2.7, -0.4], accent: "blue" },
-  { label: "Backend", pos: [2.9, 1.6, 0.2], accent: "amber" },
-  { label: "Database", pos: [3.5, -1.1, -0.3], accent: "green" },
-  { label: "Cloud", pos: [1.4, -2.7, 0.4], accent: "orange" },
-  { label: "AI / OCR", pos: [-1.7, -2.6, -0.2], accent: "cyan" },
-  { label: "Monitoring", pos: [-3.7, -0.7, 0.3], accent: "blue" },
-  { label: "CI/CD", pos: [-2.2, 0.6, -0.5], accent: "amber" },
+  { label: "Frontend", pos: [-3.5, 0.8, 0.2], accent: "cyan" },
+  { label: "API", pos: [-1.8, 0.8, -0.1], accent: "blue" },
+  { label: "Backend", pos: [0, 0.8, 0.25], accent: "amber" },
+  { label: "Database", pos: [1.8, 0.8, -0.1], accent: "green" },
+  { label: "Cloud", pos: [3.5, 0.8, 0.2], accent: "orange" },
+  { label: "AI / OCR", pos: [-0.7, -1.45, -0.25], accent: "cyan" },
+  { label: "Monitoring", pos: [2, -1.45, 0.1], accent: "blue" },
+  { label: "CI/CD", pos: [-2.55, -1.45, -0.2], accent: "amber" },
 ];
 
 const EDGES: [number, number][] = [
   [0, 1],
   [1, 2],
   [2, 3],
-  [2, 4],
-  [5, 2],
-  [4, 6],
-  [6, 0],
-  [7, 0],
-  [7, 4],
   [3, 4],
+  [5, 2],
+  [2, 6],
+  [7, 2],
 ];
 
-function System({ animate }: { animate: boolean }) {
-  const { gl } = useThree();
-
-  // Live, mutable node positions shared by nodes, edges, and packets.
+function System({ animate, compact }: { animate: boolean; compact: boolean }) {
   const posts = useMemo(
     () => NODES.map((n) => new THREE.Vector3(...n.pos)),
     []
   );
-  const nodeRefs = useRef<(THREE.Group | null)[]>([]);
   const lineRef = useRef<THREE.BufferGeometry>(null);
   const packetRef = useRef<THREE.Points>(null);
-  const dragIndex = useRef<number | null>(null);
-  const plane = useMemo(() => new THREE.Plane(), []);
-  const planeNormal = useMemo(() => new THREE.Vector3(0, 0, 1), []);
-  const hit = useMemo(() => new THREE.Vector3(), []);
 
   const lineArray = useMemo(() => new Float32Array(EDGES.length * 6), []);
   const packetArray = useMemo(() => new Float32Array(EDGES.length * 3), []);
@@ -83,37 +71,8 @@ function System({ animate }: { animate: boolean }) {
     []
   );
 
-  // Release drag anywhere the pointer is lifted.
-  useEffect(() => {
-    const up = () => {
-      dragIndex.current = null;
-      gl.domElement.style.cursor = "auto";
-    };
-    window.addEventListener("pointerup", up);
-    return () => window.removeEventListener("pointerup", up);
-  }, [gl]);
-
   useFrame((state) => {
-    // 1. If dragging, project the pointer onto the node's depth plane.
-    if (dragIndex.current !== null) {
-      const i = dragIndex.current;
-      plane.setFromNormalAndCoplanarPoint(
-        planeNormal,
-        new THREE.Vector3(0, 0, posts[i].z)
-      );
-      state.raycaster.setFromCamera(state.pointer, state.camera);
-      if (state.raycaster.ray.intersectPlane(plane, hit)) {
-        posts[i].set(hit.x, hit.y, posts[i].z);
-      }
-    }
-
-    // 2. Sync node groups (and their labels) to their positions.
-    posts.forEach((p, i) => {
-      const g = nodeRefs.current[i];
-      if (g) g.position.copy(p);
-    });
-
-    // 3. Rebuild edge lines from the live positions.
+    // Keep packet positions synchronized to the static production flow.
     if (lineRef.current) {
       EDGES.forEach(([a, b], k) => {
         lineArray[k * 6] = posts[a].x;
@@ -127,7 +86,7 @@ function System({ animate }: { animate: boolean }) {
       attr.needsUpdate = true;
     }
 
-    // 4. Move packets along their edges (respecting reduced motion).
+    // Move packets along request paths unless the user prefers reduced motion.
     if (packetRef.current) {
       const t = state.clock.elapsedTime;
       const attr = packetRef.current.geometry.attributes
@@ -145,23 +104,6 @@ function System({ animate }: { animate: boolean }) {
     }
   });
 
-  const startDrag = (i: number) => (e: ThreeEvent<PointerEvent>) => {
-    e.stopPropagation();
-    dragIndex.current = i;
-    gl.domElement.style.cursor = "grabbing";
-    try {
-      gl.domElement.setPointerCapture(e.pointerId);
-    } catch {
-      /* pointer capture is best-effort */
-    }
-  };
-
-  const onHover = (over: boolean) => () => {
-    if (dragIndex.current === null) {
-      gl.domElement.style.cursor = over ? "grab" : "auto";
-    }
-  };
-
   return (
     <group>
       {/* Edges */}
@@ -173,39 +115,29 @@ function System({ animate }: { animate: boolean }) {
       </lineSegments>
 
       {/* Nodes */}
-      {NODES.map((node, i) => {
+      {NODES.map((node) => {
         const color = ACCENT_HEX[node.accent];
         return (
           <group
             key={node.label}
             position={node.pos}
-            ref={(el) => (nodeRefs.current[i] = el)}
           >
-            {/* invisible, larger grab target */}
-            <mesh
-              onPointerDown={startDrag(i)}
-              onPointerOver={onHover(true)}
-              onPointerOut={onHover(false)}
-            >
-              <sphereGeometry args={[0.55, 16, 16]} />
-              <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-            </mesh>
-
-            {/* soft halo */}
+            {!compact && (
+              <mesh>
+                <sphereGeometry args={[0.32, 20, 20]} />
+                <meshBasicMaterial color={color} transparent opacity={0.1} depthWrite={false} />
+              </mesh>
+            )}
             <mesh>
-              <sphereGeometry args={[0.34, 24, 24]} />
-              <meshBasicMaterial color={color} transparent opacity={0.12} depthWrite={false} />
-            </mesh>
-            {/* core */}
-            <mesh>
-              <sphereGeometry args={[0.16, 24, 24]} />
+              <sphereGeometry args={[compact ? 0.12 : 0.15, 16, 16]} />
               <meshBasicMaterial color={color} />
             </mesh>
-            {/* wire ring */}
-            <mesh rotation={[Math.PI / 2.4, 0.4, 0]}>
-              <torusGeometry args={[0.28, 0.012, 10, 40]} />
-              <meshBasicMaterial color={color} transparent opacity={0.55} />
-            </mesh>
+            {!compact && (
+              <mesh rotation={[Math.PI / 2.4, 0.4, 0]}>
+                <torusGeometry args={[0.27, 0.01, 8, 32]} />
+                <meshBasicMaterial color={color} transparent opacity={0.45} />
+              </mesh>
+            )}
 
             <Html
               center
@@ -230,9 +162,8 @@ function System({ animate }: { animate: boolean }) {
         <pointsMaterial color="#f59e0b" size={0.17} transparent sizeAttenuation depthWrite={false} />
       </points>
 
-      {/* Central label */}
-      <Html center position={[0, 0, 0]} zIndexRange={[20, 10]} style={{ pointerEvents: "none" }}>
-        <span className="sysnode-core">Build → Test → Deploy</span>
+      <Html center position={[0, -0.2, 0]} zIndexRange={[20, 10]} style={{ pointerEvents: "none" }}>
+        <span className="sysnode-core">Request flow</span>
       </Html>
     </group>
   );
@@ -246,7 +177,7 @@ export function SystemArchitectureScene() {
     <div
       className="sysscene"
       role="img"
-      aria-label="Interactive 3D diagram of a software system: Frontend, API Gateway, Backend, Database, Cloud, AI/OCR, Monitoring, and CI/CD nodes connected by data-flow edges, centered on a Build, Test, Deploy pipeline. Each node can be dragged to rearrange it."
+      aria-label="3D diagram of a software system showing Frontend requests passing through an API to Backend services, Database, and Cloud, with AI/OCR, Monitoring, and CI/CD connected to the production flow."
     >
       <Canvas
         dpr={[1, isMobile ? 1.25 : 1.9]}
@@ -254,12 +185,9 @@ export function SystemArchitectureScene() {
         gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
       >
         <Suspense fallback={null}>
-          <System animate={!reducedMotion} />
+          <System animate={!reducedMotion} compact={isMobile} />
         </Suspense>
       </Canvas>
-      <span className="sysscene__hint" aria-hidden="true">
-        Drag the nodes
-      </span>
     </div>
   );
 }

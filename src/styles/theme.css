@@ -6,15 +6,15 @@
 
 :root {
   /* --- Backgrounds & surfaces --- */
-  --bg-main: #06101d;
-  --bg-secondary: #0b1626;
-  --surface-elevated: #111d30;
-  --surface-card: #172338;
+  --bg-main: #07111f;
+  --bg-secondary: #0c1828;
+  --surface-elevated: #101d2e;
+  --surface-card: #142235;
 
   /* --- Text --- */
-  --text-primary: #f4f7fb;
-  --text-secondary: #aeb9ca;
-  --text-muted: #7f8ba0;
+  --text-primary: #f7f9fc;
+  --text-secondary: #b6c1d0;
+  --text-muted: #8491a4;
 
   /* --- Accents --- */
   --amber: #f59e0b;
@@ -30,9 +30,9 @@
   --green-soft: rgba(34, 197, 94, 0.14);
 
   /* --- Borders --- */
-  --border: rgba(245, 158, 11, 0.18);
-  --border-subtle: rgba(174, 185, 202, 0.1);
-  --border-cyan: rgba(56, 189, 248, 0.22);
+  --border: rgba(245, 158, 11, 0.24);
+  --border-subtle: rgba(174, 185, 202, 0.12);
+  --border-cyan: rgba(56, 189, 248, 0.28);
 
   /* --- Gradients --- */
   --grad-action: linear-gradient(135deg, var(--amber) 0%, var(--orange) 100%);
@@ -49,9 +49,9 @@
     Consolas, monospace;
 
   /* --- Type scale (fluid) --- */
-  --fs-display: clamp(2.5rem, 6vw, 4.25rem);
-  --fs-h1: clamp(2rem, 4.5vw, 3rem);
-  --fs-h2: clamp(1.6rem, 3.2vw, 2.25rem);
+  --fs-display: clamp(2.75rem, 5vw, 4.5rem);
+  --fs-h1: clamp(2.1rem, 3.6vw, 3.25rem);
+  --fs-h2: clamp(1.7rem, 2.8vw, 2.4rem);
   --fs-h3: clamp(1.15rem, 2vw, 1.4rem);
   --fs-body: 1rem;
   --fs-small: 0.875rem;
@@ -71,13 +71,13 @@
 
   /* --- Radii --- */
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 26px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
   --radius-pill: 999px;
 
   /* --- Shadows --- */
-  --shadow-card: 0 18px 40px -24px rgba(0, 0, 0, 0.75);
+  --shadow-card: 0 16px 36px -28px rgba(0, 0, 0, 0.85);
   --shadow-glow-amber: 0 0 0 1px var(--border),
     0 12px 40px -18px rgba(245, 158, 11, 0.35);
   --shadow-glow-cyan: 0 0 0 1px var(--border-cyan),

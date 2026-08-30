@@ -48,7 +48,7 @@ h4 {
   color: var(--text-primary);
   line-height: 1.15;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 a {
@@ -109,7 +109,7 @@ ul {
 .section {
   position: relative;
   width: 100%;
-  padding-block: var(--space-24);
+  padding-block: clamp(var(--space-16), 7vw, var(--space-24));
   scroll-margin-top: var(--nav-height);
 }
 

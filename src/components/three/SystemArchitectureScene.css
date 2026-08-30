@@ -9,23 +9,6 @@
   display: block;
 }
 
-.sysscene__hint {
-  position: absolute;
-  bottom: 10px;
-  right: 12px;
-  z-index: 2;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-  padding: 0.2rem 0.5rem;
-  border-radius: var(--radius-pill);
-  background: rgba(6, 16, 29, 0.6);
-  border: 1px solid var(--border-subtle);
-  pointer-events: none;
-  user-select: none;
-}
-
 /* Node labels rendered via drei <Html> */
 .sysnode-html {
   will-change: transform;
@@ -39,17 +22,15 @@
   letter-spacing: 0.02em;
   white-space: nowrap;
   padding: 0.16rem 0.5rem;
-  border-radius: var(--radius-sm);
+  border-radius: 4px;
   color: var(--text-primary);
   background: rgba(6, 16, 29, 0.72);
   border: 1px solid color-mix(in srgb, var(--node) 45%, transparent);
-  box-shadow: 0 0 14px -6px var(--node);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 6px 14px -12px var(--node);
   user-select: none;
 }
 
-/* Central Build -> Test -> Deploy pill */
+/* Central request-flow label */
 .sysnode-core {
   display: inline-block;
   font-family: var(--font-mono);
@@ -57,18 +38,11 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   white-space: nowrap;
-  padding: 0.4rem 0.85rem;
+  padding: 0.32rem 0.65rem;
   border-radius: var(--radius-pill);
   color: var(--text-primary);
-  background: linear-gradient(
-    135deg,
-    rgba(245, 158, 11, 0.16),
-    rgba(56, 189, 248, 0.16)
-  );
-  border: 1px solid var(--border);
-  box-shadow: 0 8px 30px -12px rgba(245, 158, 11, 0.5);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(7, 17, 31, 0.88);
+  border: 1px solid var(--border-subtle);
   user-select: none;
 }
 

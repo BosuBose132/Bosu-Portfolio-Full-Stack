@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
-import { profile } from "../../data/portfolioData";
+import { heroStats, profile } from "../../data/portfolioData";
 import { SocialLinks } from "../../components/ui/SocialLinks";
-import { useTypewriter } from "../../hooks/useTypewriter";
 import "./Hero.css";
 
 const SystemArchitectureScene = lazy(() =>
@@ -10,16 +9,7 @@ const SystemArchitectureScene = lazy(() =>
   }))
 );
 
-const ROLE_PHRASES = [
-  "Full Stack Software Engineer",
-  "Backend & API Developer",
-  "AI-Powered App Builder",
-  "Cloud & DevOps Practitioner",
-];
-
 export function Hero() {
-  const typed = useTypewriter(ROLE_PHRASES);
-
   return (
     <section id="home" className="hero" aria-label="Introduction">
       <div className="container hero__inner">
@@ -30,13 +20,7 @@ export function Hero() {
             <span className="hero__name">{profile.fullName}</span>
           </h1>
 
-          <p className="hero__role" aria-label={profile.role}>
-            <span className="hero__role-static">I&rsquo;m a </span>
-            <span className="hero__role-typed">
-              {typed}
-              <span className="hero__cursor" aria-hidden="true" />
-            </span>
-          </p>
+          <p className="hero__role">{profile.role}</p>
 
           <p className="hero__desc">{profile.heroDescription}</p>
 
@@ -53,6 +37,15 @@ export function Hero() {
             </a>
             <SocialLinks size="sm" />
           </div>
+
+          <dl className="hero__stats" aria-label="Engineering highlights">
+            {heroStats.map((stat) => (
+              <div className="hero__stat" key={stat.label}>
+                <dt className="hero__stat-label">{stat.label}</dt>
+                <dd className="hero__stat-value">{stat.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
         {/* ---------------- Right: 3D system scene ---------------- */}
@@ -73,10 +66,9 @@ export function Hero() {
 
           {/* Accessible, non-canvas description of the architecture */}
           <p className="sr-only">
-            System architecture: a Frontend connects through an API Gateway to a
-            Backend, which reads and writes a Database, calls AI/OCR services,
-            and deploys to the Cloud. Monitoring and CI/CD close the loop back to
-            the Frontend, forming a Build, Test, Deploy pipeline.
+            System architecture: Frontend requests move through an API Gateway
+            to Backend services, which work with Database, AI/OCR, Cloud,
+            Monitoring, and CI/CD systems.
           </p>
         </div>
       </div>
