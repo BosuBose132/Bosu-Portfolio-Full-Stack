@@ -1,10 +1,17 @@
 import { Suspense, useEffect, useMemo, useRef, type MutableRefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
+import { Html, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import "./SystemArchitectureScene.css";
+import earthDayMap from "../../assets/textures/space/earth-daymap.jpg";
+import earthClouds from "../../assets/textures/space/earth-clouds.jpg";
+import jupiterMap from "../../assets/textures/space/jupiter.jpg";
+import marsMap from "../../assets/textures/space/mars.jpg";
+import moonMap from "../../assets/textures/space/moon.jpg";
+import saturnMap from "../../assets/textures/space/saturn.jpg";
+import saturnRingMap from "../../assets/textures/space/saturn-ring-alpha.png";
 
 type PlanetKind = "earth" | "gas" | "ringed" | "rocky" | "moon";
 
@@ -30,81 +37,13 @@ const PLANETS: PlanetConfig[] = [
   { label: "API", position: [6.95, 2.35, -2.4], radius: 0.34, kind: "moon", rotationSpeed: 0.006, secondary: true },
 ];
 
-function createCanvasTexture(draw: (context: CanvasRenderingContext2D, width: number, height: number) => void) {
-  const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 256;
-  const context = canvas.getContext("2d");
-  if (!context) return new THREE.Texture();
-  draw(context, canvas.width, canvas.height);
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.ClampToEdgeWrapping;
-  return texture;
-}
-
-function createPlanetTexture(kind: PlanetKind) {
-  return createCanvasTexture((context, width, height) => {
-    const fill = {
-      earth: "#0c4770",
-      gas: "#a9683b",
-      ringed: "#907144",
-      rocky: "#9c4228",
-      moon: "#76808b",
-    }[kind];
-    context.fillStyle = fill;
-    context.fillRect(0, 0, width, height);
-
-    if (kind === "gas") {
-      for (let y = 0; y < height; y += 11) {
-        context.fillStyle = `hsla(${20 + Math.random() * 22}, ${35 + Math.random() * 25}%, ${28 + Math.random() * 35}%, ${0.25 + Math.random() * 0.36})`;
-        context.fillRect(0, y + Math.sin(y * 0.08) * 5, width, 7 + Math.random() * 12);
-      }
-      context.fillStyle = "rgba(72, 38, 27, 0.42)";
-      context.beginPath();
-      context.ellipse(width * 0.65, height * 0.62, 60, 18, -0.08, 0, Math.PI * 2);
-      context.fill();
-      return;
-    }
-
-    if (kind === "earth") {
-      context.fillStyle = "rgba(26, 126, 92, 0.9)";
-      for (let index = 0; index < 22; index += 1) {
-        context.beginPath();
-        context.ellipse(Math.random() * width, 30 + Math.random() * (height - 60), 16 + Math.random() * 35, 8 + Math.random() * 22, Math.random() * Math.PI, 0, Math.PI * 2);
-        context.fill();
-      }
-      context.fillStyle = "rgba(205, 235, 228, 0.42)";
-      for (let index = 0; index < 20; index += 1) {
-        context.beginPath();
-        context.ellipse(Math.random() * width, Math.random() * height, 22 + Math.random() * 45, 2 + Math.random() * 7, Math.random() * Math.PI, 0, Math.PI * 2);
-        context.fill();
-      }
-      return;
-    }
-
-    for (let index = 0; index < (kind === "moon" ? 55 : 38); index += 1) {
-      const shade = kind === "rocky" ? 25 + Math.random() * 22 : 28 + Math.random() * 24;
-      context.fillStyle = `hsla(${kind === "rocky" ? 16 : 210}, ${kind === "rocky" ? 48 : 12}%, ${shade}%, ${0.18 + Math.random() * 0.25})`;
-      context.beginPath();
-      context.ellipse(Math.random() * width, Math.random() * height, 3 + Math.random() * 18, 3 + Math.random() * 12, Math.random() * Math.PI, 0, Math.PI * 2);
-      context.fill();
-    }
-  });
-}
-
-function createCloudTexture() {
-  return createCanvasTexture((context, width, height) => {
-    context.clearRect(0, 0, width, height);
-    for (let index = 0; index < 46; index += 1) {
-      context.fillStyle = `rgba(220, 244, 255, ${0.05 + Math.random() * 0.22})`;
-      context.beginPath();
-      context.ellipse(Math.random() * width, Math.random() * height, 16 + Math.random() * 44, 2 + Math.random() * 8, Math.random() * Math.PI, 0, Math.PI * 2);
-      context.fill();
-    }
-  });
-}
+const TEXTURE_MAPS: Record<PlanetKind, string> = {
+  earth: earthDayMap,
+  gas: jupiterMap,
+  ringed: saturnMap,
+  rocky: marsMap,
+  moon: moonMap,
+};
 
 function createStars(count: number, width: number, depth: number) {
   const positions = new Float32Array(count * 3);
@@ -149,8 +88,17 @@ function Atmosphere({ radius }: { radius: number }) {
 function Planet({ config, compact, animate }: { config: PlanetConfig; compact: boolean; animate: boolean }) {
   const groupRef = useRef<THREE.Group>(null);
   const cloudsRef = useRef<THREE.Mesh>(null);
-  const map = useMemo(() => createPlanetTexture(config.kind), [config.kind]);
-  const clouds = useMemo(() => config.kind === "earth" ? createCloudTexture() : null, [config.kind]);
+  const map = useTexture(TEXTURE_MAPS[config.kind]);
+  const clouds = useTexture(earthClouds);
+  const ringMap = useTexture(saturnRingMap);
+
+  useEffect(() => {
+    [map, clouds, ringMap].forEach((texture) => {
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.anisotropy = 4;
+      texture.needsUpdate = true;
+    });
+  }, [clouds, map, ringMap]);
 
   useFrame((state) => {
     if (!animate || !groupRef.current) return;
@@ -160,10 +108,10 @@ function Planet({ config, compact, animate }: { config: PlanetConfig; compact: b
   });
 
   return <group ref={groupRef} position={config.position}>
-    <mesh><sphereGeometry args={[config.radius, compact ? 18 : 36, compact ? 18 : 36]} /><meshStandardMaterial map={map} roughness={config.kind === "earth" ? 0.48 : 0.82} metalness={0.01} emissive={config.kind === "earth" ? "#0b1d2d" : "#120a05"} emissiveIntensity={0.08} /></mesh>
-    {clouds && !compact && <mesh ref={cloudsRef} scale={1.012}><sphereGeometry args={[config.radius, 32, 32]} /><meshStandardMaterial map={clouds} transparent opacity={0.62} depthWrite={false} roughness={0.9} /></mesh>}
+    <mesh><sphereGeometry args={[config.radius, compact ? 18 : 36, compact ? 18 : 36]} /><meshStandardMaterial map={map} roughness={config.kind === "earth" ? 0.52 : 0.86} metalness={0.01} emissive={config.kind === "earth" ? "#06101a" : "#080604"} emissiveIntensity={0.035} /></mesh>
+    {config.kind === "earth" && !compact && <mesh ref={cloudsRef} scale={1.012}><sphereGeometry args={[config.radius, 32, 32]} /><meshStandardMaterial map={clouds} transparent opacity={0.42} depthWrite={false} roughness={0.9} /></mesh>}
     {config.kind === "earth" && !compact && <Atmosphere radius={config.radius} />}
-    {config.kind === "ringed" && !compact && <mesh rotation={[Math.PI / 2.45, 0.2, 0]}><ringGeometry args={[config.radius * 1.28, config.radius * 2.12, 72]} /><meshStandardMaterial color="#ad9066" transparent opacity={0.48} side={THREE.DoubleSide} roughness={0.92} /></mesh>}
+    {config.kind === "ringed" && !compact && <mesh rotation={[Math.PI / 2.45, 0.2, 0]}><ringGeometry args={[config.radius * 1.28, config.radius * 2.12, 96]} /><meshStandardMaterial map={ringMap} alphaMap={ringMap} transparent opacity={0.7} alphaTest={0.04} side={THREE.DoubleSide} roughness={0.94} depthWrite={false} /></mesh>}
     <Html center position={[0, config.radius + 0.28, 0]} style={{ pointerEvents: "none" }} wrapperClass="sysnode-html"><span className={`sysnode-label ${config.secondary ? "sysnode-label--secondary" : ""}`}>{config.label}</span></Html>
   </group>;
 }
@@ -183,7 +131,17 @@ function Debris({ compact, animate }: { compact: boolean; animate: boolean }) {
   }, [count]);
   useEffect(() => { matrices.forEach((matrix, index) => meshRef.current?.setMatrixAt(index, matrix)); if (meshRef.current) meshRef.current.instanceMatrix.needsUpdate = true; }, [matrices]);
   useFrame((_, delta) => { if (animate && meshRef.current) meshRef.current.rotation.y += delta * 0.008; });
-  return <instancedMesh ref={meshRef} args={[undefined, undefined, count]}><dodecahedronGeometry args={[1, 0]} /><meshStandardMaterial color="#566270" roughness={0.98} /></instancedMesh>;
+  const geometry = useMemo(() => {
+    const asteroid = new THREE.IcosahedronGeometry(1, 2);
+    const positions = asteroid.attributes.position as THREE.BufferAttribute;
+    for (let index = 0; index < positions.count; index += 1) {
+      const scale = 0.8 + Math.sin(index * 2.7) * 0.11 + Math.cos(index * 1.3) * 0.08;
+      positions.setXYZ(index, positions.getX(index) * scale, positions.getY(index) * scale, positions.getZ(index) * scale);
+    }
+    asteroid.computeVertexNormals();
+    return asteroid;
+  }, []);
+  return <instancedMesh ref={meshRef} args={[undefined, undefined, count]}><primitive object={geometry} attach="geometry" /><meshStandardMaterial color="#4f5660" roughness={0.98} metalness={0.02} /></instancedMesh>;
 }
 
 function SolarSystem({ compact, animate, pointerRef }: { compact: boolean; animate: boolean; pointerRef: MutableRefObject<ScenePointer> }) {
