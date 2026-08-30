@@ -72,6 +72,12 @@
   flex-wrap: wrap;
   gap: var(--space-3);
 }
+.hero__actions .btn--primary {
+  min-width: 132px;
+}
+.hero__actions .btn--secondary {
+  min-width: 156px;
+}
 
 .hero__meta {
   margin-top: var(--space-6);

@@ -45,6 +45,8 @@ const ROUTES: Route[] = [
   { from: 4, to: 7 },
 ];
 
+const PACKET_ROUTES = ROUTES.slice(0, 5);
+
 function createParticleField(count: number, depth: number, spread: number) {
   const home = new Float32Array(count * 3);
   const current = new Float32Array(count * 3);
@@ -52,11 +54,11 @@ function createParticleField(count: number, depth: number, spread: number) {
 
   for (let index = 0; index < count; index += 1) {
     const angle = Math.random() * Math.PI * 2;
-    const radius = Math.pow(Math.random(), 0.62) * spread + 0.5;
+    const radius = Math.pow(Math.random(), 0.58) * spread + 0.5;
     const armOffset = Math.sin(angle * 2.3 + radius * 1.5) * 0.55;
     const arrayIndex = index * 3;
     const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius * 0.44 + armOffset;
+    const y = Math.sin(angle) * radius * 0.4 + armOffset;
     const z = depth + (Math.random() - 0.5) * 2.2;
     home[arrayIndex] = current[arrayIndex] = x;
     home[arrayIndex + 1] = current[arrayIndex + 1] = y;
@@ -136,7 +138,7 @@ function createPlanetGeometry(radius: number, color: string, segments: number) {
     const x = positions.getX(index);
     const y = positions.getY(index);
     const z = positions.getZ(index);
-    const variation = 0.72 + Math.sin(x * 9 + y * 5 + z * 7) * 0.11 + Math.sin(x * 19 - z * 13) * 0.07;
+    const variation = 0.6 + Math.sin(x * 8 + y * 5 + z * 7) * 0.13 + Math.sin(x * 20 - z * 12) * 0.1 + Math.cos(y * 15 + z * 9) * 0.06;
     colors[index * 3] = base.r * variation;
     colors[index * 3 + 1] = base.g * variation;
     colors[index * 3 + 2] = base.b * variation;
@@ -159,28 +161,47 @@ function ArchitectureRoutes() {
     return new Float32Array(points);
   }, []);
 
-  return <lineSegments><bufferGeometry><bufferAttribute attach="attributes-position" args={[positions, 3]} /></bufferGeometry><lineBasicMaterial color="#72bee5" transparent opacity={0.11} depthWrite={false} /></lineSegments>;
+  return <lineSegments><bufferGeometry><bufferAttribute attach="attributes-position" args={[positions, 3]} /></bufferGeometry><lineBasicMaterial color="#72bee5" transparent opacity={0.055} depthWrite={false} /></lineSegments>;
 }
 
 function DataPackets({ animate }: { animate: boolean }) {
   const pointsRef = useRef<THREE.Points>(null);
-  const positions = useMemo(() => new Float32Array(ROUTES.length * 3), []);
+  const positions = useMemo(() => new Float32Array(PACKET_ROUTES.length * 3), []);
 
   useFrame((state) => {
     if (!pointsRef.current) return;
     const attribute = pointsRef.current.geometry.attributes.position as THREE.BufferAttribute;
-    ROUTES.forEach(({ from, to }, index) => {
+    PACKET_ROUTES.forEach(({ from, to }, index) => {
       const start = new THREE.Vector3(...SYSTEM_BODIES[from].position);
       const end = new THREE.Vector3(...SYSTEM_BODIES[to].position);
-      const progress = animate ? (state.clock.elapsedTime * (0.06 + index * 0.006) + index * 0.27) % 1 : index / ROUTES.length;
-      const control = start.clone().lerp(end, 0.5).add(new THREE.Vector3(0, ROUTES[index].primary ? 0.28 : -0.22, -0.42));
+      const progress = animate ? (state.clock.elapsedTime * (0.052 + index * 0.007) + index * 0.31) % 1 : index / PACKET_ROUTES.length;
+      const control = start.clone().lerp(end, 0.5).add(new THREE.Vector3(0, PACKET_ROUTES[index].primary ? 0.28 : -0.22, -0.42));
       const position = new THREE.QuadraticBezierCurve3(start, control, end).getPoint(progress);
       attribute.setXYZ(index, position.x, position.y, position.z);
     });
     attribute.needsUpdate = true;
   });
 
-  return <points ref={pointsRef}><bufferGeometry><bufferAttribute attach="attributes-position" args={[positions, 3]} /></bufferGeometry><pointsMaterial color="#ffd58b" size={0.075} transparent opacity={0.7} sizeAttenuation depthWrite={false} /></points>;
+  return <points ref={pointsRef}><bufferGeometry><bufferAttribute attach="attributes-position" args={[positions, 3]} /></bufferGeometry><pointsMaterial color="#ffd58b" size={0.06} transparent opacity={0.58} sizeAttenuation depthWrite={false} /></points>;
+}
+
+function Atmosphere({ color, radius, satellite, compact }: Pick<SystemBody, "color" | "radius" | "satellite"> & { compact: boolean }) {
+  if (compact) return null;
+
+  return (
+    <mesh scale={satellite ? 1.08 : 1.18}>
+      <sphereGeometry args={[radius, 20, 20]} />
+      <shaderMaterial
+        transparent
+        depthWrite={false}
+        blending={THREE.AdditiveBlending}
+        side={THREE.BackSide}
+        uniforms={{ glowColor: { value: new THREE.Color(color) }, intensity: { value: satellite ? 0.16 : 0.28 } }}
+        vertexShader="varying vec3 vNormal; varying vec3 vViewPosition; void main() { vNormal = normalize(normalMatrix * normal); vec4 mvPosition = modelViewMatrix * vec4(position, 1.0); vViewPosition = -mvPosition.xyz; gl_Position = projectionMatrix * mvPosition; }"
+        fragmentShader="uniform vec3 glowColor; uniform float intensity; varying vec3 vNormal; varying vec3 vViewPosition; void main() { float rim = pow(1.0 - max(dot(normalize(vNormal), normalize(vViewPosition)), 0.0), 2.4); gl_FragColor = vec4(glowColor, rim * intensity); }"
+      />
+    </mesh>
+  );
 }
 
 function SystemPlanet({ body, animate, compact }: { body: SystemBody; animate: boolean; compact: boolean }) {
@@ -195,9 +216,9 @@ function SystemPlanet({ body, animate, compact }: { body: SystemBody; animate: b
 
   return (
     <group ref={bodyRef} position={body.position}>
-      {!compact && <mesh scale={1.3}><sphereGeometry args={[body.radius, 18, 18]} /><meshBasicMaterial color={body.color} transparent opacity={0.035} depthWrite={false} /></mesh>}
-      <mesh geometry={geometry}><meshStandardMaterial vertexColors roughness={body.satellite ? 0.55 : 0.68} metalness={body.satellite ? 0.2 : 0.1} emissive={body.color} emissiveIntensity={body.satellite ? 0.2 : 0.06} /></mesh>
-      {!compact && !body.satellite && <mesh scale={1.13}><sphereGeometry args={[body.radius, 18, 18]} /><meshBasicMaterial color={body.color} transparent opacity={0.07} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>}
+      {!compact && <mesh scale={1.28}><sphereGeometry args={[body.radius, 18, 18]} /><meshBasicMaterial color={body.color} transparent opacity={0.025} depthWrite={false} /></mesh>}
+      <mesh geometry={geometry}><meshStandardMaterial vertexColors roughness={body.satellite ? 0.58 : 0.76} metalness={body.satellite ? 0.16 : 0.06} emissive={body.color} emissiveIntensity={body.satellite ? 0.16 : 0.04} /></mesh>
+      <Atmosphere color={body.color} radius={body.radius} satellite={body.satellite} compact={compact} />
       {body.ring && !compact && <mesh rotation={[Math.PI / 2.8, 0.2, 0]}><torusGeometry args={[body.radius * 1.36, 0.012, 8, 48]} /><meshBasicMaterial color={body.color} transparent opacity={0.28} depthWrite={false} /></mesh>}
       <Html center position={[0, body.radius + 0.25, 0]} style={{ pointerEvents: "none" }} wrapperClass="sysnode-html"><span className={`sysnode-label ${body.satellite ? "sysnode-label--secondary" : ""} sysnode-label--${body.accent}`}>{body.label}</span></Html>
     </group>
@@ -216,9 +237,9 @@ function FullStackUniverse({ animate, interactive, compact }: { animate: boolean
 
   return (
     <>
-      <ParticleField count={compact ? 70 : 190} depth={-4} spread={7.5} size={0.025} opacity={0.42} animate={animate} interactive={false} parallax={0.025} />
-      <ParticleField count={compact ? 90 : 260} depth={-1.2} spread={5.9} size={0.035} opacity={0.55} animate={animate} interactive={false} parallax={0.06} />
-      <ParticleField count={compact ? 45 : 150} depth={1.5} spread={4.8} size={0.045} opacity={0.68} animate={animate} interactive={interactive} parallax={0.12} />
+      <ParticleField count={compact ? 60 : 270} depth={-4.5} spread={9} size={0.02} opacity={0.36} animate={animate} interactive={false} parallax={0.02} />
+      <ParticleField count={compact ? 85 : 330} depth={-1.3} spread={7.2} size={0.03} opacity={0.5} animate={animate} interactive={false} parallax={0.055} />
+      <ParticleField count={compact ? 42 : 180} depth={1.5} spread={6.2} size={0.042} opacity={0.52} animate={animate} interactive={interactive} parallax={0.11} />
       <group ref={systemRef}>
         <ArchitectureRoutes />
         <DataPackets animate={animate} />
