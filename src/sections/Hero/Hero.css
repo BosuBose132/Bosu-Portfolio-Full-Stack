@@ -126,35 +126,22 @@
 /* ---------------- Right (visual) ---------------- */
 .hero__visual {
   position: relative;
+  isolation: isolate;
 }
 .hero__visual-frame {
   position: relative;
   aspect-ratio: 1 / 1;
-  width: 100%;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-subtle);
-  background: radial-gradient(
-      120% 120% at 50% 30%,
-      rgba(56, 189, 248, 0.06),
-      transparent 60%
-    ),
-    var(--grad-surface);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
+  width: calc(100% + var(--space-8));
+  margin-left: calc(var(--space-4) * -1);
+  overflow: visible;
 }
-/* faint grid inside the frame */
 .hero__visual-frame::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background-image: linear-gradient(
-      rgba(174, 185, 202, 0.05) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, rgba(174, 185, 202, 0.05) 1px, transparent 1px);
-  background-size: 38px 38px;
-  mask-image: radial-gradient(120% 120% at 50% 40%, #000 55%, transparent 100%);
-  -webkit-mask-image: radial-gradient(120% 120% at 50% 40%, #000 55%, transparent 100%);
+  z-index: -1;
+  inset: 8% 4%;
+  background: radial-gradient(ellipse at 52% 48%, rgba(48, 125, 205, 0.16), transparent 47%), radial-gradient(ellipse at 70% 38%, rgba(119, 83, 186, 0.1), transparent 50%);
+  filter: blur(24px);
   pointer-events: none;
 }
 
@@ -248,5 +235,7 @@
   }
   .hero__visual-frame {
     aspect-ratio: 1.2 / 1;
+    width: 100%;
+    margin-left: 0;
   }
 }
