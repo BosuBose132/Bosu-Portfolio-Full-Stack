@@ -1,0 +1,38 @@
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Fade the field toward the edges so text stays readable */
+  -webkit-mask-image: radial-gradient(
+    120% 100% at 50% 40%,
+    #000 55%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    120% 100% at 50% 40%,
+    #000 55%,
+    transparent 100%
+  );
+}
+
+.bg-layer canvas {
+  display: block;
+}
+
+/* Static fallback for reduced-motion users */
+.bg-layer--static {
+  background-image: radial-gradient(
+      520px 520px at 78% 12%,
+      rgba(56, 189, 248, 0.08),
+      transparent 62%
+    ),
+    radial-gradient(
+      620px 620px at 12% 78%,
+      rgba(245, 158, 11, 0.06),
+      transparent 60%
+    ),
+    linear-gradient(transparent 0 96%, rgba(174, 185, 202, 0.04) 96%),
+    linear-gradient(90deg, transparent 0 96%, rgba(174, 185, 202, 0.04) 96%);
+  background-size: auto, auto, 44px 44px, 44px 44px;
+}

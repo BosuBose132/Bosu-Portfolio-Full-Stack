@@ -1,0 +1,96 @@
+/* =====================================================================
+   THEME — Software Engineering Systems
+   "From problem to production."
+   Single source of design tokens. Colors from the approved palette.
+   ===================================================================== */
+
+:root {
+  /* --- Backgrounds & surfaces --- */
+  --bg-main: #06101d;
+  --bg-secondary: #0b1626;
+  --surface-elevated: #111d30;
+  --surface-card: #172338;
+
+  /* --- Text --- */
+  --text-primary: #f4f7fb;
+  --text-secondary: #aeb9ca;
+  --text-muted: #7f8ba0;
+
+  /* --- Accents --- */
+  --amber: #f59e0b;
+  --orange: #f97316;
+  --cyan: #38bdf8;
+  --blue: #3b82f6;
+  --green: #22c55e;
+
+  /* --- Accent tints (transparent for glows / fills) --- */
+  --amber-soft: rgba(245, 158, 11, 0.12);
+  --cyan-soft: rgba(56, 189, 248, 0.12);
+  --blue-soft: rgba(59, 130, 246, 0.12);
+  --green-soft: rgba(34, 197, 94, 0.14);
+
+  /* --- Borders --- */
+  --border: rgba(245, 158, 11, 0.18);
+  --border-subtle: rgba(174, 185, 202, 0.1);
+  --border-cyan: rgba(56, 189, 248, 0.22);
+
+  /* --- Gradients --- */
+  --grad-action: linear-gradient(135deg, var(--amber) 0%, var(--orange) 100%);
+  --grad-data: linear-gradient(135deg, var(--cyan) 0%, var(--blue) 100%);
+  --grad-surface: linear-gradient(
+    160deg,
+    var(--surface-card) 0%,
+    var(--surface-elevated) 100%
+  );
+
+  /* --- Typography --- */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo,
+    Consolas, monospace;
+
+  /* --- Type scale (fluid) --- */
+  --fs-display: clamp(2.5rem, 6vw, 4.25rem);
+  --fs-h1: clamp(2rem, 4.5vw, 3rem);
+  --fs-h2: clamp(1.6rem, 3.2vw, 2.25rem);
+  --fs-h3: clamp(1.15rem, 2vw, 1.4rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-mono: 0.8rem;
+
+  /* --- Spacing scale (8px base) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* --- Radii --- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --radius-pill: 999px;
+
+  /* --- Shadows --- */
+  --shadow-card: 0 18px 40px -24px rgba(0, 0, 0, 0.75);
+  --shadow-glow-amber: 0 0 0 1px var(--border),
+    0 12px 40px -18px rgba(245, 158, 11, 0.35);
+  --shadow-glow-cyan: 0 0 0 1px var(--border-cyan),
+    0 12px 40px -18px rgba(56, 189, 248, 0.35);
+
+  /* --- Layout --- */
+  --nav-height: 68px;
+  --content-max: 1200px;
+  --content-narrow: 900px;
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 160ms;
+  --dur-med: 320ms;
+  --dur-slow: 640ms;
+}

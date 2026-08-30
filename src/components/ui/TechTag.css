@@ -1,0 +1,46 @@
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  padding: 0.28rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: rgba(174, 185, 202, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
+}
+
+.tech-tag:hover {
+  color: var(--text-primary);
+}
+
+.tech-tag--amber {
+  color: var(--amber);
+  background: var(--amber-soft);
+  border-color: var(--border);
+}
+.tech-tag--cyan {
+  color: var(--cyan);
+  background: var(--cyan-soft);
+  border-color: var(--border-cyan);
+}
+.tech-tag--blue {
+  color: var(--blue);
+  background: var(--blue-soft);
+  border-color: rgba(59, 130, 246, 0.22);
+}
+.tech-tag--green {
+  color: var(--green);
+  background: var(--green-soft);
+  border-color: rgba(34, 197, 94, 0.22);
+}
+.tech-tag--orange {
+  color: var(--orange);
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.24);
+}

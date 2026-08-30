@@ -1,0 +1,155 @@
+.education__track {
+  position: relative;
+}
+
+/* Circuit-line spine running behind the cards */
+.education__line {
+  position: absolute;
+  top: 26px;
+  left: 6%;
+  right: 6%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--border-cyan) 0 10px,
+    transparent 10px 20px
+  );
+  opacity: 0.6;
+}
+
+.education__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+}
+
+/* ---------------- Card ---------------- */
+.edu-card {
+  position: relative;
+  padding: var(--space-6);
+  padding-top: var(--space-8);
+  border-radius: var(--radius-lg);
+  background: var(--grad-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+.edu-card:hover {
+  border-color: var(--border);
+  transform: translateY(-3px);
+}
+
+.edu-card__node {
+  position: absolute;
+  top: 0;
+  left: var(--space-6);
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--amber);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 0 6px var(--bg-main);
+}
+
+.edu-card__period {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyan);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-2);
+}
+.edu-card__degree {
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+.edu-card__school {
+  margin-top: var(--space-2);
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.94rem;
+}
+.edu-card__location {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.edu-card__desc {
+  margin-top: var(--space-4);
+  font-size: 0.9rem;
+}
+
+.edu-card__coursework {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+.edu-card__coursework-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+.edu-card__coursework-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.edu-card__coursework-list li {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  padding: 0.28rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: rgba(56, 189, 248, 0.06);
+  border: 1px solid var(--border-cyan);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 780px) {
+  .education__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+  .education__line {
+    top: 0;
+    bottom: 0;
+    left: 21px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background: repeating-linear-gradient(
+      180deg,
+      var(--border-cyan) 0 10px,
+      transparent 10px 20px
+    );
+  }
+  .edu-card {
+    margin-left: var(--space-8);
+  }
+  .edu-card__node {
+    top: var(--space-8);
+    left: calc(-1 * var(--space-8) - 22px + 1px);
+    transform: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .edu-card {
+    margin-left: var(--space-6);
+  }
+  .education__line {
+    left: 15px;
+  }
+  .edu-card__node {
+    width: 38px;
+    height: 38px;
+    left: calc(-1 * var(--space-6) - 19px);
+  }
+}
