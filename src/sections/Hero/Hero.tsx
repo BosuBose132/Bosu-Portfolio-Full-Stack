@@ -12,6 +12,12 @@ const SystemArchitectureScene = lazy(() =>
 export function Hero() {
   return (
     <section id="home" className="hero" aria-label="Introduction">
+      <div className="hero__universe" aria-hidden="true">
+        <Suspense fallback={null}>
+          <SystemArchitectureScene />
+        </Suspense>
+      </div>
+
       <div className="container hero__inner">
         {/* ---------------- Left: intro ---------------- */}
         <div className="hero__content">
@@ -48,23 +54,8 @@ export function Hero() {
           </dl>
         </div>
 
-        {/* ---------------- Right: 3D system scene ---------------- */}
+        {/* Reserved visual space keeps the architecture cluster on the right. */}
         <div className="hero__visual">
-          <div className="hero__visual-frame">
-            <Suspense
-              fallback={
-                <div className="hero__visual-fallback" aria-hidden="true">
-                  <span className="hero__visual-fallback-label">
-                    Build → Test → Deploy
-                  </span>
-                </div>
-              }
-            >
-              <SystemArchitectureScene />
-            </Suspense>
-          </div>
-
-          {/* Accessible, non-canvas description of the architecture */}
           <p className="sr-only">
             System architecture: Frontend requests move through an API Gateway
             to Backend services, which work with Database, AI/OCR, Cloud,

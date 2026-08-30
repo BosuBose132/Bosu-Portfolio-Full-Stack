@@ -6,6 +6,14 @@
   padding-top: calc(var(--nav-height) + var(--space-6));
   padding-bottom: var(--space-12);
   scroll-margin-top: var(--nav-height);
+  overflow: hidden;
+}
+
+.hero__universe {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: auto;
 }
 
 .hero__inner {
@@ -14,6 +22,14 @@
   gap: clamp(var(--space-8), 5vw, var(--space-16));
   align-items: center;
   width: 100%;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__content,
+.hero__actions {
+  pointer-events: auto;
 }
 
 /* ---------------- Left ---------------- */
@@ -132,22 +148,7 @@
 /* ---------------- Right (visual) ---------------- */
 .hero__visual {
   position: relative;
-  isolation: isolate;
-}
-.hero__visual-frame {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  width: calc(100% + var(--space-8));
-  margin-left: calc(var(--space-4) * -1);
-  overflow: visible;
-}
-.hero__visual-frame::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 4% -4%;
-  background: radial-gradient(ellipse at 48% 48%, rgba(48, 125, 205, 0.18), transparent 46%), radial-gradient(ellipse at 72% 42%, rgba(119, 83, 186, 0.08), transparent 48%), radial-gradient(ellipse at 34% 72%, rgba(230, 155, 49, 0.06), transparent 42%);
-  filter: blur(28px);
+  min-height: 400px;
   pointer-events: none;
 }
 
@@ -214,9 +215,8 @@
   }
   .hero__visual {
     order: 2;
-    max-width: 560px;
-    margin-inline: auto;
     width: 100%;
+    min-height: 280px;
   }
   .hero__scroll {
     display: none;
@@ -238,10 +238,5 @@
   }
   .hero__actions .btn {
     flex: 1 1 auto;
-  }
-  .hero__visual-frame {
-    aspect-ratio: 1.2 / 1;
-    width: 100%;
-    margin-left: 0;
   }
 }

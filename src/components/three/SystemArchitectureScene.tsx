@@ -25,14 +25,14 @@ interface Route {
 }
 
 const SYSTEM_BODIES: SystemBody[] = [
-  { label: "FRONTEND", position: [-3.25, 1.2, 0.4], radius: 0.38, color: "#42bde8", accent: "cyan" },
-  { label: "API", position: [-1.55, 0.68, -0.25], radius: 0.47, color: "#426ee8", accent: "blue" },
-  { label: "BACKEND", position: [0.28, 0.86, 0.35], radius: 0.74, color: "#e39a33", accent: "amber", ring: true },
-  { label: "DATA", position: [2.18, 0.42, -0.1], radius: 0.52, color: "#29ad89", accent: "green" },
-  { label: "CLOUD", position: [3.28, -1.2, 0.28], radius: 0.66, color: "#db7434", accent: "orange", ring: true },
-  { label: "AI / OCR", position: [-0.42, -1.62, -0.35], radius: 0.27, color: "#48c5e5", accent: "cyan", satellite: true },
-  { label: "CI / CD", position: [-2.13, -1.38, -0.1], radius: 0.18, color: "#e6a23c", accent: "amber", satellite: true },
-  { label: "MONITORING", position: [1.48, -1.52, 0.05], radius: 0.21, color: "#5d8ff4", accent: "blue", satellite: true },
+  { label: "FRONTEND", position: [0.85, 1.2, 0.4], radius: 0.38, color: "#42bde8", accent: "cyan" },
+  { label: "API", position: [2.1, 0.68, -0.25], radius: 0.47, color: "#426ee8", accent: "blue" },
+  { label: "BACKEND", position: [3.48, 0.86, 0.35], radius: 0.74, color: "#e39a33", accent: "amber", ring: true },
+  { label: "DATA", position: [4.92, 0.42, -0.1], radius: 0.52, color: "#29ad89", accent: "green" },
+  { label: "CLOUD", position: [5.25, -1.2, 0.28], radius: 0.66, color: "#db7434", accent: "orange", ring: true },
+  { label: "AI / OCR", position: [3.02, -1.62, -0.35], radius: 0.27, color: "#48c5e5", accent: "cyan", satellite: true },
+  { label: "CI / CD", position: [1.42, -1.38, -0.1], radius: 0.18, color: "#e6a23c", accent: "amber", satellite: true },
+  { label: "MONITORING", position: [4.36, -1.52, 0.05], radius: 0.21, color: "#5d8ff4", accent: "blue", satellite: true },
 ];
 
 const ROUTES: Route[] = [
@@ -47,7 +47,7 @@ const ROUTES: Route[] = [
 
 const PACKET_ROUTES = ROUTES.slice(0, 5);
 
-function createParticleField(count: number, depth: number, spread: number) {
+function createParticleField(count: number, depth: number, spread: number, centerX: number) {
   const home = new Float32Array(count * 3);
   const current = new Float32Array(count * 3);
   const colors = new Float32Array(count * 3);
@@ -57,7 +57,7 @@ function createParticleField(count: number, depth: number, spread: number) {
     const radius = Math.pow(Math.random(), 0.58) * spread + 0.5;
     const armOffset = Math.sin(angle * 2.3 + radius * 1.5) * 0.55;
     const arrayIndex = index * 3;
-    const x = Math.cos(angle) * radius;
+    const x = Math.cos(angle) * radius + centerX;
     const y = Math.sin(angle) * radius * 0.4 + armOffset;
     const z = depth + (Math.random() - 0.5) * 2.2;
     home[arrayIndex] = current[arrayIndex] = x;
@@ -73,10 +73,11 @@ function createParticleField(count: number, depth: number, spread: number) {
   return { home, current, colors };
 }
 
-function ParticleField({ count, depth, spread, size, opacity, animate, interactive, parallax }: {
+function ParticleField({ count, depth, spread, centerX, size, opacity, animate, interactive, parallax }: {
   count: number;
   depth: number;
   spread: number;
+  centerX: number;
   size: number;
   opacity: number;
   animate: boolean;
@@ -85,7 +86,7 @@ function ParticleField({ count, depth, spread, size, opacity, animate, interacti
 }) {
   const groupRef = useRef<THREE.Group>(null);
   const pointsRef = useRef<THREE.Points>(null);
-  const field = useMemo(() => createParticleField(count, depth, spread), [count, depth, spread]);
+  const field = useMemo(() => createParticleField(count, depth, spread, centerX), [count, depth, spread, centerX]);
 
   useFrame((state, delta) => {
     if (!animate || !pointsRef.current || !groupRef.current) return;
@@ -237,9 +238,9 @@ function FullStackUniverse({ animate, interactive, compact }: { animate: boolean
 
   return (
     <>
-      <ParticleField count={compact ? 60 : 270} depth={-4.5} spread={9} size={0.02} opacity={0.36} animate={animate} interactive={false} parallax={0.02} />
-      <ParticleField count={compact ? 85 : 330} depth={-1.3} spread={7.2} size={0.03} opacity={0.5} animate={animate} interactive={false} parallax={0.055} />
-      <ParticleField count={compact ? 42 : 180} depth={1.5} spread={6.2} size={0.042} opacity={0.52} animate={animate} interactive={interactive} parallax={0.11} />
+      <ParticleField count={compact ? 60 : 270} depth={-4.5} spread={10} centerX={1.2} size={0.02} opacity={0.32} animate={animate} interactive={false} parallax={0.02} />
+      <ParticleField count={compact ? 85 : 330} depth={-1.3} spread={7.8} centerX={2.2} size={0.03} opacity={0.46} animate={animate} interactive={false} parallax={0.055} />
+      <ParticleField count={compact ? 42 : 180} depth={1.5} spread={6.4} centerX={3.1} size={0.042} opacity={0.5} animate={animate} interactive={interactive} parallax={0.11} />
       <group ref={systemRef}>
         <ArchitectureRoutes />
         <DataPackets animate={animate} />
