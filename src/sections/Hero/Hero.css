@@ -139,9 +139,9 @@
   content: "";
   position: absolute;
   z-index: -1;
-  inset: 8% 4%;
-  background: radial-gradient(ellipse at 52% 48%, rgba(48, 125, 205, 0.16), transparent 47%), radial-gradient(ellipse at 70% 38%, rgba(119, 83, 186, 0.1), transparent 50%);
-  filter: blur(24px);
+  inset: 4% -4%;
+  background: radial-gradient(ellipse at 48% 48%, rgba(48, 125, 205, 0.18), transparent 46%), radial-gradient(ellipse at 72% 42%, rgba(119, 83, 186, 0.08), transparent 48%), radial-gradient(ellipse at 34% 72%, rgba(230, 155, 49, 0.06), transparent 42%);
+  filter: blur(28px);
   pointer-events: none;
 }
 

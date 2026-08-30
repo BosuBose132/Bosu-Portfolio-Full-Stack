@@ -25,6 +25,7 @@
 .btn--primary {
   background: var(--grad-action);
   color: #171006;
+  border-color: rgba(255, 225, 166, 0.3);
   box-shadow: 0 8px 20px -14px rgba(245, 158, 11, 0.62);
 }
 .btn--primary:hover {
@@ -33,7 +34,7 @@
 }
 
 .btn--secondary {
-  background: var(--surface-card);
+  background: rgba(20, 34, 53, 0.72);
   color: var(--text-primary);
   border-color: var(--border-subtle);
 }
