@@ -27,9 +27,19 @@ export function Hero() {
         </Suspense>
       </div>
 
+      <div className="hero__hud hero__hud--top" aria-hidden="true">
+        <span>FULL STACK SYSTEMS</span>
+        <i />
+        <span>PRODUCTION READY</span>
+      </div>
+
       <div className="container hero__inner">
         {/* ---------------- Left: intro ---------------- */}
         <div className="hero__content">
+          <p className="hero__status">
+            <span aria-hidden="true" />
+            Full Stack Software Engineer
+          </p>
           <h1 className="hero__title">
             <span className="hero__greeting">Hi, I&rsquo;m</span>
             <span className="hero__name">{profile.fullName}</span>
@@ -41,14 +51,15 @@ export function Hero() {
 
           <div className="hero__actions">
             <a href="#projects" className="btn btn--primary">
-              View Projects
+              <span>View Projects</span>
+              <span aria-hidden="true">↗</span>
             </a>
             <a href={profile.resumeUrl} download className="btn btn--secondary">
               <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden="true">
                 <path d="M12 3v12m0 0 4-4m-4 4-4-4" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" strokeLinecap="round" />
               </svg>
-              Download Resume
+              <span>Download Resume</span>
             </a>
             <SocialLinks size="sm" />
           </div>

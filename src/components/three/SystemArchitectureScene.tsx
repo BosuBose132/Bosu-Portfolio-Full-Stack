@@ -30,11 +30,11 @@ interface PlanetConfig {
 }
 
 const PLANETS: PlanetConfig[] = [
-  { label: "FRONTEND", position: [1.3, 1.55, -0.5], radius: 0.7, kind: "earth", rotationSpeed: 0.022 },
-  { label: "BACKEND", position: [4.45, 0.95, 0.1], radius: 1.16, kind: "gas", rotationSpeed: 0.009 },
-  { label: "CLOUD", position: [6.35, -1.95, 0.8], radius: 1.02, kind: "ringed", rotationSpeed: 0.012 },
-  { label: "DATA", position: [3.15, -2.25, -0.8], radius: 0.48, kind: "rocky", rotationSpeed: 0.018, secondary: true },
-  { label: "API", position: [6.95, 2.35, -2.4], radius: 0.34, kind: "moon", rotationSpeed: 0.006, secondary: true },
+  { label: "01 // FRONTEND", position: [1.55, 2.05, -1.1], radius: 0.7, kind: "earth", rotationSpeed: 0.022 },
+  { label: "03 // BACKEND", position: [5.35, 1.05, 0.15], radius: 1.16, kind: "gas", rotationSpeed: 0.009 },
+  { label: "05 // CLOUD", position: [7.55, -2.85, 0.9], radius: 1.34, kind: "ringed", rotationSpeed: 0.012 },
+  { label: "04 // DATA", position: [4.15, -2.85, -1.55], radius: 0.4, kind: "rocky", rotationSpeed: 0.018, secondary: true },
+  { label: "02 // API", position: [7.7, 2.85, -2.8], radius: 0.3, kind: "moon", rotationSpeed: 0.006, secondary: true },
 ];
 
 const TEXTURE_MAPS: Record<PlanetKind, string> = {
@@ -143,7 +143,7 @@ function Planet({ config, compact, animate }: { config: PlanetConfig; compact: b
     <mesh><sphereGeometry args={[config.radius, compact ? 18 : 36, compact ? 18 : 36]} /><meshStandardMaterial map={map} roughness={config.kind === "earth" ? 0.52 : 0.86} metalness={0.01} emissive={config.kind === "earth" ? "#06101a" : "#080604"} emissiveIntensity={0.035} /></mesh>
     {config.kind === "earth" && !compact && <mesh ref={cloudsRef} scale={1.012}><sphereGeometry args={[config.radius, 32, 32]} /><meshStandardMaterial map={clouds} transparent opacity={0.42} depthWrite={false} roughness={0.9} /></mesh>}
     {config.kind === "earth" && !compact && <Atmosphere radius={config.radius} />}
-    {config.kind === "ringed" && !compact && <mesh rotation={[Math.PI / 2.45, 0.2, 0]}><ringGeometry args={[config.radius * 1.28, config.radius * 2.12, 96]} /><meshStandardMaterial map={ringMap} alphaMap={ringMap} transparent opacity={0.7} alphaTest={0.04} side={THREE.DoubleSide} roughness={0.94} depthWrite={false} /></mesh>}
+    {config.kind === "ringed" && !compact && <group rotation={[Math.PI / 2.45, 0.2, 0]}><mesh><ringGeometry args={[config.radius * 1.25, config.radius * 2.18, 128]} /><meshStandardMaterial map={ringMap} alphaMap={ringMap} transparent opacity={0.84} alphaTest={0.025} side={THREE.DoubleSide} roughness={0.78} metalness={0.04} depthWrite={false} /></mesh><mesh rotation={[0, 0, 0.006]}><ringGeometry args={[config.radius * 1.3, config.radius * 2.05, 128]} /><meshBasicMaterial map={ringMap} transparent opacity={0.2} side={THREE.DoubleSide} depthWrite={false} /></mesh></group>}
     <Html center position={[0, config.radius + 0.28, 0]} style={{ pointerEvents: "none" }} wrapperClass="sysnode-html"><span className={`sysnode-label ${config.secondary ? "sysnode-label--secondary" : ""}`}>{config.label}</span></Html>
   </group>;
 }

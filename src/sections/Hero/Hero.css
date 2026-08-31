@@ -53,9 +53,50 @@
   content: "";
   position: absolute;
   z-index: -1;
-  inset: -5rem -5rem -4rem -4rem;
-  background: radial-gradient(ellipse at 45% 50%, rgba(2, 5, 10, 0.94) 0%, rgba(2, 5, 10, 0.7) 42%, transparent 72%);
+  inset: -5.5rem -5rem -4.5rem -4rem;
+  background: radial-gradient(ellipse at 43% 50%, rgba(2, 5, 10, 0.96) 0%, rgba(2, 5, 10, 0.78) 45%, transparent 74%);
   pointer-events: none;
+}
+
+.hero__hud {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: rgba(195, 216, 232, 0.42);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+}
+.hero__hud i {
+  width: 28px;
+  height: 1px;
+  background: rgba(133, 201, 235, 0.28);
+}
+.hero__hud--top {
+  top: calc(var(--nav-height) + var(--space-3));
+  right: max(var(--space-6), calc((100vw - var(--content-max)) / 2));
+}
+
+.hero__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  color: rgba(185, 222, 241, 0.76);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hero__status span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.55);
 }
 
 /* ---------------- Left ---------------- */
@@ -76,7 +117,7 @@
 .hero__title {
   display: flex;
   flex-direction: column;
-  gap: 0.12em;
+  gap: 0.1em;
   font-size: var(--fs-display);
   line-height: 1.05;
 }
@@ -92,11 +133,12 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  text-shadow: 0 0 24px rgba(129, 211, 255, 0.12);
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 22px rgba(129, 211, 255, 0.14);
 }
 
 .hero__role {
-  margin-top: var(--space-6);
+  margin-top: 1.25rem;
   font-size: clamp(1.15rem, 1.7vw, 1.4rem);
   font-weight: 600;
   color: var(--cyan);
@@ -116,7 +158,7 @@
   gap: var(--space-3);
 }
 .hero__actions .btn--primary {
-  min-width: 132px;
+  min-width: 150px;
 }
 .hero__actions .btn--secondary {
   min-width: 156px;
@@ -245,6 +287,9 @@
     width: 100%;
     min-height: 280px;
   }
+  .hero__hud--top {
+    right: var(--space-6);
+  }
   .hero__scroll {
     display: none;
   }
@@ -256,6 +301,9 @@
   }
   .hero__content::before {
     inset: -3rem -2rem;
+  }
+  .hero__hud {
+    display: none;
   }
   .hero__stats {
     grid-template-columns: repeat(2, 1fr);
