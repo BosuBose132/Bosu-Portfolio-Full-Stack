@@ -45,38 +45,69 @@ const TEXTURE_MAPS: Record<PlanetKind, string> = {
   moon: moonMap,
 };
 
-function createStars(count: number, width: number, depth: number) {
+function createStars(count: number, width: number, depth: number, densityBias = 0) {
+  const home = new Float32Array(count * 3);
   const positions = new Float32Array(count * 3);
+  const velocity = new Float32Array(count * 2);
   const colors = new Float32Array(count * 3);
   for (let index = 0; index < count; index += 1) {
     const pointer = index * 3;
-    positions[pointer] = (Math.random() - 0.5) * width;
-    positions[pointer + 1] = (Math.random() - 0.5) * 9 + Math.sin(index * 0.7) * 0.3;
-    positions[pointer + 2] = depth + (Math.random() - 0.5) * 2.5;
+    const x = (Math.random() - 0.5) * width + densityBias;
+    home[pointer] = positions[pointer] = x;
+    home[pointer + 1] = positions[pointer + 1] = (Math.random() - 0.5) * 9 + Math.sin(index * 0.7) * 0.3;
+    home[pointer + 2] = positions[pointer + 2] = depth + (Math.random() - 0.5) * 2.5;
     const warm = Math.random() > 0.9;
     colors[pointer] = warm ? 1 : 0.52 + Math.random() * 0.23;
     colors[pointer + 1] = warm ? 0.72 : 0.67 + Math.random() * 0.21;
     colors[pointer + 2] = warm ? 0.44 : 0.85 + Math.random() * 0.15;
   }
-  return { positions, colors };
+  return { home, positions, velocity, colors };
 }
 
-function StarField({ count, width, depth, size, opacity, parallax, animate, pointerRef }: {
+function StarField({ count, width, depth, size, opacity, parallax, interactive, animate, pointerRef }: {
   count: number;
   width: number;
   depth: number;
   size: number;
   opacity: number;
   parallax: number;
+  interactive?: boolean;
   animate: boolean;
   pointerRef: MutableRefObject<ScenePointer>;
 }) {
   const groupRef = useRef<THREE.Group>(null);
-  const stars = useMemo(() => createStars(count, width, depth), [count, width, depth]);
+  const stars = useMemo(() => createStars(count, width, depth, interactive ? 2.1 : 0), [count, depth, interactive, width]);
   useFrame((_, delta) => {
     if (!animate || !groupRef.current) return;
     groupRef.current.position.x += (pointerRef.current.x * parallax - groupRef.current.position.x) * delta * 0.25;
     groupRef.current.position.y += (pointerRef.current.y * parallax * 0.55 - groupRef.current.position.y) * delta * 0.25;
+    if (!interactive) return;
+    const attribute = (groupRef.current.children[0] as THREE.Points).geometry.attributes.position as THREE.BufferAttribute;
+    const pointerX = pointerRef.current.x * 8;
+    const pointerY = pointerRef.current.y * 4.5;
+    const frameScale = Math.min(delta * 60, 1.5);
+    for (let index = 0; index < count; index += 1) {
+      const positionIndex = index * 3;
+      const velocityIndex = index * 2;
+      const currentX = stars.positions[positionIndex];
+      const currentY = stars.positions[positionIndex + 1];
+      const dx = currentX - pointerX;
+      const dy = currentY - pointerY;
+      const distance = Math.hypot(dx, dy);
+      const influence = Math.max(0, 1 - distance / 1.8) ** 2;
+      if (distance > 0.001 && influence > 0) {
+        stars.velocity[velocityIndex] += (dx / distance) * influence * 0.007 * frameScale;
+        stars.velocity[velocityIndex + 1] += (dy / distance) * influence * 0.007 * frameScale;
+      }
+      stars.velocity[velocityIndex] += (stars.home[positionIndex] - currentX) * 0.012 * frameScale;
+      stars.velocity[velocityIndex + 1] += (stars.home[positionIndex + 1] - currentY) * 0.012 * frameScale;
+      stars.velocity[velocityIndex] *= 0.9;
+      stars.velocity[velocityIndex + 1] *= 0.9;
+      stars.positions[positionIndex] += stars.velocity[velocityIndex] * frameScale;
+      stars.positions[positionIndex + 1] += stars.velocity[velocityIndex + 1] * frameScale;
+      attribute.setXYZ(index, stars.positions[positionIndex], stars.positions[positionIndex + 1], stars.positions[positionIndex + 2]);
+    }
+    attribute.needsUpdate = true;
   });
   return <group ref={groupRef}><points><bufferGeometry><bufferAttribute attach="attributes-position" args={[stars.positions, 3]} /><bufferAttribute attach="attributes-color" args={[stars.colors, 3]} /></bufferGeometry><pointsMaterial size={size} transparent opacity={opacity} vertexColors sizeAttenuation depthWrite={false} /></points></group>;
 }
@@ -103,6 +134,7 @@ function Planet({ config, compact, animate }: { config: PlanetConfig; compact: b
   useFrame((state) => {
     if (!animate || !groupRef.current) return;
     groupRef.current.rotation.y = state.clock.elapsedTime * config.rotationSpeed;
+    groupRef.current.position.x = config.position[0] + Math.cos(state.clock.elapsedTime * 0.09 + config.radius * 2) * 0.018;
     groupRef.current.position.y = config.position[1] + Math.sin(state.clock.elapsedTime * 0.12 + config.radius) * 0.025;
     if (cloudsRef.current) cloudsRef.current.rotation.y = state.clock.elapsedTime * 0.032;
   });
@@ -116,7 +148,8 @@ function Planet({ config, compact, animate }: { config: PlanetConfig; compact: b
   </group>;
 }
 
-function Debris({ compact, animate }: { compact: boolean; animate: boolean }) {
+function Debris({ compact, animate, pointerRef }: { compact: boolean; animate: boolean; pointerRef: MutableRefObject<ScenePointer> }) {
+  const groupRef = useRef<THREE.Group>(null);
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const count = compact ? 4 : 12;
   const matrices = useMemo(() => {
@@ -130,7 +163,12 @@ function Debris({ compact, animate }: { compact: boolean; animate: boolean }) {
     });
   }, [count]);
   useEffect(() => { matrices.forEach((matrix, index) => meshRef.current?.setMatrixAt(index, matrix)); if (meshRef.current) meshRef.current.instanceMatrix.needsUpdate = true; }, [matrices]);
-  useFrame((_, delta) => { if (animate && meshRef.current) meshRef.current.rotation.y += delta * 0.008; });
+  useFrame((state, delta) => {
+    if (!animate || !meshRef.current || !groupRef.current) return;
+    meshRef.current.rotation.y += delta * 0.008;
+    groupRef.current.position.x += (pointerRef.current.x * 0.12 - groupRef.current.position.x) * delta * 0.22;
+    groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.08) * 0.05;
+  });
   const geometry = useMemo(() => {
     const asteroid = new THREE.IcosahedronGeometry(1, 2);
     const positions = asteroid.attributes.position as THREE.BufferAttribute;
@@ -141,7 +179,7 @@ function Debris({ compact, animate }: { compact: boolean; animate: boolean }) {
     asteroid.computeVertexNormals();
     return asteroid;
   }, []);
-  return <instancedMesh ref={meshRef} args={[undefined, undefined, count]}><primitive object={geometry} attach="geometry" /><meshStandardMaterial color="#4f5660" roughness={0.98} metalness={0.02} /></instancedMesh>;
+  return <group ref={groupRef}><instancedMesh ref={meshRef} args={[undefined, undefined, count]}><primitive object={geometry} attach="geometry" /><meshStandardMaterial color="#4f5660" roughness={0.98} metalness={0.02} /></instancedMesh></group>;
 }
 
 function SolarSystem({ compact, animate, pointerRef }: { compact: boolean; animate: boolean; pointerRef: MutableRefObject<ScenePointer> }) {
@@ -149,12 +187,14 @@ function SolarSystem({ compact, animate, pointerRef }: { compact: boolean; anima
   useFrame((_, delta) => {
     if (!animate || !systemRef.current) return;
     systemRef.current.rotation.y += delta * 0.002;
-    systemRef.current.position.x += (pointerRef.current.x * 0.035 - systemRef.current.position.x) * delta * 0.2;
+    systemRef.current.position.x += (pointerRef.current.x * 0.05 - systemRef.current.position.x) * delta * 0.2;
+    systemRef.current.position.y += (pointerRef.current.y * 0.025 - systemRef.current.position.y) * delta * 0.2;
   });
   return <>
-    <StarField count={compact ? 180 : 680} width={19} depth={-5.8} size={0.014} opacity={0.46} parallax={0.015} animate={animate} pointerRef={pointerRef} />
-    <StarField count={compact ? 80 : 220} width={16} depth={-2.6} size={0.028} opacity={0.34} parallax={0.04} animate={animate} pointerRef={pointerRef} />
-    <group ref={systemRef}><Debris compact={compact} animate={animate} />{PLANETS.map((config) => <Planet key={config.label} config={config} compact={compact} animate={animate} />)}<ambientLight intensity={0.08} /><directionalLight position={[-5, 4, 7]} intensity={2.8} color="#d7ecff" /><pointLight position={[2.5, -1, 4]} intensity={12} color="#ffb26a" distance={11} /></group>
+    <StarField count={compact ? 180 : 760} width={20} depth={-5.8} size={0.014} opacity={0.42} parallax={0.012} animate={animate} pointerRef={pointerRef} />
+    <StarField count={compact ? 80 : 280} width={17} depth={-2.6} size={0.026} opacity={0.36} parallax={0.04} animate={animate} pointerRef={pointerRef} />
+    <StarField count={compact ? 24 : 120} width={15} depth={1.4} size={0.048} opacity={0.28} parallax={0.12} interactive={!compact} animate={animate} pointerRef={pointerRef} />
+    <group ref={systemRef}><Debris compact={compact} animate={animate} pointerRef={pointerRef} />{PLANETS.map((config) => <Planet key={config.label} config={config} compact={compact} animate={animate} />)}<ambientLight intensity={0.08} /><directionalLight position={[-5, 4, 7]} intensity={2.8} color="#d7ecff" /><pointLight position={[2.5, -1, 4]} intensity={12} color="#ffb26a" distance={11} /></group>
   </>;
 }
 
