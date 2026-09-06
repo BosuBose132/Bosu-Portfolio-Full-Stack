@@ -139,6 +139,15 @@
   text-shadow: 0 0 20px rgba(129, 211, 255, 0.14);
 }
 
+@media (min-width: 1200px) {
+  .hero__inner {
+    grid-template-columns: minmax(620px, 1.23fr) minmax(360px, 0.77fr);
+  }
+  .hero__name {
+    white-space: nowrap;
+  }
+}
+
 .hero__role {
   margin-top: 1.2rem;
   font-size: clamp(1.16rem, 1.75vw, 1.43rem);
