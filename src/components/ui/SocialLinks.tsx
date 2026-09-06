@@ -4,12 +4,13 @@ import "./SocialLinks.css";
 interface SocialLinksProps {
   size?: "sm" | "md";
   showEmail?: boolean;
+  className?: string;
 }
 
 /** GitHub / LinkedIn (and optional email) icon links. Reused site-wide. */
-export function SocialLinks({ size = "md", showEmail = false }: SocialLinksProps) {
+export function SocialLinks({ size = "md", showEmail = false, className = "" }: SocialLinksProps) {
   return (
-    <div className={`social-links social-links--${size}`}>
+    <div className={`social-links social-links--${size} ${className}`.trim()}>
       <a
         href={contact.github}
         target="_blank"

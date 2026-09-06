@@ -50,18 +50,18 @@ export function Hero() {
           <p className="hero__desc">{profile.heroDescription}</p>
 
           <div className="hero__actions">
-            <a href="#projects" className="btn btn--primary">
+            <a href="#projects" className="btn btn--primary hero__cta hero__cta--primary">
               <span>View Projects</span>
               <span aria-hidden="true">↗</span>
             </a>
-            <a href={profile.resumeUrl} download className="btn btn--secondary">
+            <a href={profile.resumeUrl} download className="btn btn--secondary hero__cta hero__cta--secondary">
               <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden="true">
                 <path d="M12 3v12m0 0 4-4m-4 4-4-4" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" strokeLinecap="round" />
               </svg>
               <span>Download Resume</span>
             </a>
-            <SocialLinks size="sm" />
+            <SocialLinks size="sm" className="hero__socials" />
           </div>
 
           <dl className="hero__stats" aria-label="Engineering highlights">
