@@ -1,5 +1,7 @@
 .about {
   position: relative;
+  min-height: 100svh;
+  padding-bottom: calc(var(--space-24) + env(safe-area-inset-bottom));
   overflow: hidden;
   background:
     radial-gradient(ellipse at 13% 22%, rgba(44, 101, 137, 0.075), transparent 35%),
@@ -22,7 +24,11 @@
     radial-gradient(circle at 12% 94%, rgba(255, 255, 255, 0.38) 0 0.45px, transparent 0.7px),
     radial-gradient(circle at 34% 7%, rgba(171, 214, 238, 0.44) 0 0.55px, transparent 0.8px),
     radial-gradient(circle at 59% 45%, rgba(245, 249, 251, 0.36) 0 0.4px, transparent 0.65px),
-    radial-gradient(circle at 84% 91%, rgba(142, 202, 235, 0.46) 0 0.55px, transparent 0.8px);
+    radial-gradient(circle at 84% 91%, rgba(142, 202, 235, 0.46) 0 0.55px, transparent 0.8px),
+    radial-gradient(circle at 5% 52%, rgba(224, 241, 250, 0.48) 0 0.65px, transparent 0.9px),
+    radial-gradient(circle at 38% 74%, rgba(160, 211, 237, 0.38) 0 0.45px, transparent 0.7px),
+    radial-gradient(circle at 73% 96%, rgba(241, 248, 252, 0.46) 0 0.55px, transparent 0.8px),
+    radial-gradient(circle at 96% 54%, rgba(149, 207, 236, 0.42) 0 0.5px, transparent 0.75px);
   content: "";
   opacity: 0.66;
   pointer-events: none;
@@ -52,6 +58,7 @@
   position: relative;
   width: min(100%, 410px);
   padding: 0.7rem;
+  overflow: hidden;
   border: 1px solid rgba(128, 189, 220, 0.36);
   background: linear-gradient(145deg, rgba(110, 181, 208, 0.055), rgba(3, 8, 13, 0.82) 34%, rgba(2, 5, 9, 0.94));
   box-shadow: 0 24px 60px -36px rgba(0, 0, 0, 0.98), inset 0 1px 0 rgba(211, 241, 255, 0.09);
@@ -70,21 +77,11 @@
   height: auto;
   aspect-ratio: 10 / 11;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 24%;
   border: 1px solid rgba(213, 238, 250, 0.14);
   filter: saturate(0.86) contrast(1.04);
-}
-.about__frame-index {
-  position: absolute;
-  z-index: 2;
-  top: 1.25rem;
-  left: 1.25rem;
-  padding: 0.22rem 0.38rem;
-  background: rgba(3, 10, 17, 0.72);
-  color: rgba(222, 242, 251, 0.82);
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.08em;
+  transform: scale(1.1);
+  transform-origin: center 24%;
 }
 .about__frame-corner {
   position: absolute;
@@ -136,5 +133,8 @@
   .about__title { font-size: clamp(2rem, 10vw, 2.75rem); }
   .about__intro { margin-top: var(--space-4); }
   .about__specialties-list { grid-template-columns: 1fr; }
+  .about__portrait-img {
+    transform: scale(1.06);
+  }
 }
 @media (prefers-reduced-motion: reduce) { .about__specialty { transition: none; } }

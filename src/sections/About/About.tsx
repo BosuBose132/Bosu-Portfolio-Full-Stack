@@ -10,7 +10,6 @@ export function About() {
           {/* ---------- Portrait ---------- */}
           <Reveal className="about__portrait-col">
             <div className="about__portrait-frame">
-              <span className="about__frame-index" aria-hidden="true">PROFILE / 02</span>
               <span className="about__frame-corner about__frame-corner--top" aria-hidden="true" />
               <span className="about__frame-corner about__frame-corner--bottom" aria-hidden="true" />
               <img
@@ -38,7 +37,7 @@ export function About() {
               <span aria-hidden="true" />
               02 // About
             </p>
-            <h2 className="about__title">Engineer behind the systems</h2>
+            <h2 className="about__title">About Me</h2>
             <p className="about__intro">{about.intro}</p>
 
             {about.paragraphs.map((p, i) => (
