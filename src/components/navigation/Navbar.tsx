@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { navItems, profile } from "../../data/portfolioData";
 import { useScrollSpy } from "../../hooks/useScrollSpy";
 import { StatusBadge } from "../ui/StatusBadge";
@@ -27,18 +27,8 @@ const compactLabels: Record<keyof typeof dockIconNames, string> = {
 };
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-
-  /* Elevate the bar once the user scrolls past the hero fold */
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
+    <header className="navbar">
       <nav className="navbar__inner" aria-label="Primary">
         <a href="#home" className="navbar__brand">
           <span className="navbar__logo" aria-hidden="true">
@@ -93,7 +83,7 @@ export function NavigationDock() {
 }
 
 function NavDockIcon({ name }: { name: DockIconName }) {
-  const common = { fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  const common = { fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   const paths: Record<DockIconName, ReactNode> = {
     home: <><path {...common} d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z" /><path {...common} d="M9 21v-6h6v6" /></>,
     user: <><circle {...common} cx="12" cy="8" r="3.5" /><path {...common} d="M4.5 21c.7-4 3.2-6 7.5-6s6.8 2 7.5 6" /></>,

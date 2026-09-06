@@ -4,27 +4,16 @@
   left: 0;
   right: 0;
   z-index: 100;
-  padding-top: max(clamp(2rem, 3vw, 3rem), env(safe-area-inset-top));
+  padding-top: max(clamp(2.25rem, 3.2vw, 3.25rem), env(safe-area-inset-top));
   display: flex;
   align-items: center;
   background: transparent;
-  transition: background var(--dur-med) var(--ease-out),
-    border-color var(--dur-med) var(--ease-out),
-    backdrop-filter var(--dur-med) var(--ease-out);
-  border-bottom: 1px solid transparent;
-}
-
-.navbar--scrolled {
-  background: rgba(2, 5, 10, 0.9);
-  backdrop-filter: blur(12px) saturate(125%);
-  -webkit-backdrop-filter: blur(12px) saturate(125%);
-  border-bottom-color: var(--border-subtle);
 }
 
 .navbar__inner {
   width: 100%;
   max-width: none;
-  padding-inline: clamp(2rem, 7vw, 7rem);
+  padding-inline: clamp(2.25rem, 7.5vw, 7.5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -62,7 +51,7 @@
 
 .navbar__brand-name {
   font-weight: 700;
-  font-size: 1.14rem;
+  font-size: 1.16rem;
   color: var(--text-primary);
   letter-spacing: -0.01em;
 }
@@ -75,10 +64,12 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 0.52rem 0.9rem;
+  min-width: clamp(6.5rem, 7.5vw, 7.25rem);
+  justify-content: center;
+  padding: 0.56rem 1rem;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 500;
+  font-size: 0.8rem;
+  font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #ffd58c;
@@ -128,7 +119,7 @@
   justify-content: center;
   gap: 0.22rem;
   border-radius: 7px;
-  color: rgba(239, 247, 252, 0.86);
+  color: rgba(255, 255, 255, 0.9);
   transition: color 180ms var(--ease-out), background 180ms var(--ease-out), transform 180ms var(--ease-out);
 }
 .nav-dock__icon {
@@ -139,8 +130,8 @@
   overflow: hidden;
   max-width: 100%;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 650;
   line-height: 1.1;
   letter-spacing: 0.025em;
   text-overflow: ellipsis;
@@ -172,7 +163,7 @@
   background: rgba(55, 137, 176, 0.19);
 }
 .nav-dock__item--active .nav-dock__icon {
-  color: #d8f4ff;
+  color: #c9efff;
 }
 .nav-dock__item--active::after {
   opacity: 1;
@@ -185,7 +176,7 @@
     padding-inline: var(--space-4);
   }
   .navbar {
-    padding-top: max(1.25rem, env(safe-area-inset-top));
+    padding-top: max(1.5rem, env(safe-area-inset-top));
   }
   .navbar__logo {
     font-size: 1.05rem;
@@ -198,7 +189,8 @@
     font-size: 1rem;
   }
   .navbar__resume {
-    padding: 0.44rem 0.66rem;
+    min-width: 5.75rem;
+    padding: 0.48rem 0.72rem;
     font-size: 0.7rem;
   }
   .nav-dock {
@@ -221,7 +213,7 @@
   }
   .nav-dock__label--compact {
     display: block;
-    font-size: 0.58rem;
+    font-size: 0.6rem;
   }
 }
 
@@ -233,7 +225,7 @@
     width: calc(100vw - 0.75rem);
   }
   .nav-dock__label {
-    font-size: 0.52rem;
+    font-size: 0.54rem;
   }
 }
 
