@@ -33,7 +33,7 @@ interface PlanetConfig {
 const PLANETS: PlanetConfig[] = [
   { label: "01 // FRONTEND", position: [1.55, 2.05, -1.1], labelPosition: [-0.82, 0.68, 0], radius: 0.7, kind: "earth", rotationSpeed: 0.022 },
   { label: "03 // BACKEND", position: [5.35, 1.05, 0.15], labelPosition: [1.3, 0.65, 0], radius: 1.16, kind: "gas", rotationSpeed: 0.009 },
-  { label: "05 // CLOUD", position: [6.95, -2.45, 0.9], labelPosition: [-1.05, 0.98, 0], radius: 1.34, kind: "ringed", rotationSpeed: 0.012 },
+  { label: "05 // CLOUD", position: [6.68, -2.2, 0.9], labelPosition: [-1.22, 0.9, 0], radius: 1.34, kind: "ringed", rotationSpeed: 0.012 },
   { label: "04 // DATA", position: [4.15, -2.85, -1.55], labelPosition: [0.55, 0.25, 0], radius: 0.4, kind: "rocky", rotationSpeed: 0.018, secondary: true },
   { label: "02 // API", position: [7.7, 2.85, -2.8], labelPosition: [-0.52, 0.44, 0], radius: 0.3, kind: "moon", rotationSpeed: 0.006, secondary: true },
 ];
@@ -145,7 +145,7 @@ function Planet({ config, compact, animate }: { config: PlanetConfig; compact: b
     <mesh><sphereGeometry args={[config.radius, compact ? 18 : 36, compact ? 18 : 36]} /><meshStandardMaterial map={map} roughness={config.kind === "earth" ? 0.52 : 0.86} metalness={0.01} emissive={config.kind === "earth" ? "#06101a" : "#080604"} emissiveIntensity={0.035} /></mesh>
     {config.kind === "earth" && !compact && <mesh ref={cloudsRef} scale={1.012}><sphereGeometry args={[config.radius, 32, 32]} /><meshStandardMaterial map={clouds} transparent opacity={0.42} depthWrite={false} roughness={0.9} /></mesh>}
     {config.kind === "earth" && !compact && <Atmosphere radius={config.radius} />}
-    {config.kind === "ringed" && !compact && <group rotation={[Math.PI / 2.45, 0.2, 0]}><mesh><ringGeometry args={[config.radius * 1.25, config.radius * 2.18, 128]} /><meshStandardMaterial map={ringMap} alphaMap={ringMap} transparent opacity={0.9} alphaTest={0.02} side={THREE.DoubleSide} roughness={0.7} metalness={0.07} color="#d7e2e8" depthWrite={false} /></mesh><mesh rotation={[0, 0, 0.006]}><ringGeometry args={[config.radius * 1.3, config.radius * 2.05, 128]} /><meshBasicMaterial map={ringMap} transparent opacity={0.24} color="#a9cfe0" side={THREE.DoubleSide} depthWrite={false} /></mesh></group>}
+    {config.kind === "ringed" && !compact && <group rotation={[Math.PI / 2.45, 0.2, 0]}><mesh><ringGeometry args={[config.radius * 1.25, config.radius * 2.18, 128]} /><meshStandardMaterial map={ringMap} alphaMap={ringMap} transparent opacity={0.92} alphaTest={0.016} side={THREE.DoubleSide} roughness={0.66} metalness={0.08} color="#dce8ed" depthWrite={false} /></mesh><mesh rotation={[0, 0, 0.006]}><ringGeometry args={[config.radius * 1.3, config.radius * 2.05, 128]} /><meshBasicMaterial map={ringMap} transparent opacity={0.28} color="#b4d5e4" side={THREE.DoubleSide} depthWrite={false} /></mesh></group>}
     <Html center position={config.labelPosition} style={{ pointerEvents: "none" }} wrapperClass="sysnode-html"><span className={`sysnode-label ${config.secondary ? "sysnode-label--secondary" : ""}`}>{config.label}</span></Html>
   </group>;
 }
@@ -195,7 +195,7 @@ function SolarSystem({ compact, animate, pointerRef }: { compact: boolean; anima
   return <>
     <StarField count={compact ? 180 : 760} width={20} depth={-5.8} size={0.014} opacity={0.42} parallax={0.012} animate={animate} pointerRef={pointerRef} />
     <StarField count={compact ? 80 : 280} width={17} depth={-2.6} size={0.026} opacity={0.36} parallax={0.04} animate={animate} pointerRef={pointerRef} />
-    <StarField count={compact ? 7 : 24} width={16} depth={-0.8} size={0.072} opacity={0.3} parallax={0.07} animate={animate} pointerRef={pointerRef} />
+    <StarField count={compact ? 8 : 30} width={16} depth={-0.8} size={0.068} opacity={0.3} parallax={0.07} animate={animate} pointerRef={pointerRef} />
     <StarField count={compact ? 24 : 120} width={15} depth={1.4} size={0.048} opacity={0.28} parallax={0.12} interactive={!compact} animate={animate} pointerRef={pointerRef} />
     <group ref={systemRef}><Debris compact={compact} animate={animate} pointerRef={pointerRef} />{PLANETS.map((config) => <Planet key={config.label} config={config} compact={compact} animate={animate} />)}<ambientLight intensity={0.08} /><directionalLight position={[-5, 4, 7]} intensity={2.8} color="#d7ecff" /><pointLight position={[2.5, -1, 4]} intensity={12} color="#ffb26a" distance={11} /></group>
   </>;

@@ -29,7 +29,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  color: rgba(214, 234, 245, 0.76);
+  color: rgba(214, 234, 245, 0.8);
   font-family: var(--font-mono);
   font-size: 0.56rem;
   font-weight: 500;
@@ -57,7 +57,7 @@
   color: rgba(182, 193, 208, 0.68);
   font-size: 0.48rem;
   letter-spacing: 0.05em;
-  opacity: 0.38;
+  opacity: 0.32;
 }
 
 .sysnode-label--amber { border-color: rgba(245, 158, 11, 0.38); }
