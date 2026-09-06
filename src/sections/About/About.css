@@ -2,9 +2,9 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 12% 42%, rgba(43, 111, 137, 0.06), transparent 25%),
-    radial-gradient(ellipse at 88% 18%, rgba(48, 76, 116, 0.045), transparent 28%),
-    linear-gradient(180deg, #02040a 0%, #03060b 38%, #05070c 100%);
+    radial-gradient(ellipse at 14% 38%, rgba(52, 124, 150, 0.05), transparent 28%),
+    radial-gradient(ellipse at 82% 14%, rgba(42, 74, 111, 0.04), transparent 32%),
+    linear-gradient(180deg, #02050a 0%, #02050a 24%, #03060b 68%, #05070c 100%);
 }
 
 .about::before {
@@ -28,8 +28,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(115deg, transparent 18%, rgba(70, 147, 174, 0.025) 42%, transparent 64%),
-    radial-gradient(ellipse at 18% 48%, rgba(123, 211, 239, 0.045), transparent 22%);
+    linear-gradient(115deg, transparent 18%, rgba(70, 147, 174, 0.018) 42%, transparent 64%),
+    radial-gradient(ellipse at 19% 47%, rgba(123, 211, 239, 0.035), transparent 24%);
   content: "";
   pointer-events: none;
 }
@@ -64,9 +64,9 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 10 / 11;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 30%;
   border: 1px solid rgba(213, 238, 250, 0.14);
   filter: saturate(0.86) contrast(1.04);
 }
@@ -95,8 +95,8 @@
 .about__portrait-caption { display: flex; align-items: center; gap: var(--space-3); }
 .about__caption-line { width: 2rem; height: 1px; background: rgba(124, 200, 235, 0.6); }
 .about__caption-name, .about__caption-role { display: block; }
-.about__caption-name { font-size: 0.86rem; font-weight: 650; color: var(--text-primary); }
-.about__caption-role { margin-top: 0.1rem; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.04em; color: rgba(153, 213, 240, 0.76); }
+.about__caption-name { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); }
+.about__caption-role { margin-top: 0.12rem; font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.04em; color: rgba(169, 220, 242, 0.8); }
 
 .about__text { max-width: 46rem; }
 .about__eyebrow {
