@@ -4,8 +4,6 @@ import { useScrollSpy } from "../../hooks/useScrollSpy";
 import { StatusBadge } from "../ui/StatusBadge";
 import "./Navbar.css";
 
-const sectionIds = navItems.map((n) => n.id);
-
 const dockIconNames = {
   home: "home",
   about: "user",
@@ -30,7 +28,6 @@ const compactLabels: Record<keyof typeof dockIconNames, string> = {
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const activeId = useScrollSpy(sectionIds);
 
   /* Elevate the bar once the user scrolls past the hero fold */
   useEffect(() => {
@@ -67,24 +64,31 @@ export function Navbar() {
         </a>
       </nav>
 
-      <nav className="nav-dock" aria-label="Section navigation">
-        <ul className="nav-dock__list">
-          {navItems.map((item) => (
-            <li key={item.id}>
-              <a
-                href={`#${item.id}`}
-                className={`nav-dock__item ${activeId === item.id ? "nav-dock__item--active" : ""}`}
-                aria-current={activeId === item.id ? "true" : undefined}
-              >
-                <NavDockIcon name={dockIconNames[item.id as keyof typeof dockIconNames]} />
-                <span className="nav-dock__label nav-dock__label--full">{item.label}</span>
-                <span className="nav-dock__label nav-dock__label--compact">{compactLabels[item.id as keyof typeof dockIconNames]}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
     </header>
+  );
+}
+
+export function NavigationDock() {
+  const activeId = useScrollSpy(navItems.map((item) => item.id));
+
+  return (
+    <nav className="nav-dock" aria-label="Section navigation">
+      <ul className="nav-dock__list">
+        {navItems.map((item) => (
+          <li key={item.id}>
+            <a
+              href={`#${item.id}`}
+              className={`nav-dock__item ${activeId === item.id ? "nav-dock__item--active" : ""}`}
+              aria-current={activeId === item.id ? "true" : undefined}
+            >
+              <NavDockIcon name={dockIconNames[item.id as keyof typeof dockIconNames]} />
+              <span className="nav-dock__label nav-dock__label--full">{item.label}</span>
+              <span className="nav-dock__label nav-dock__label--compact">{compactLabels[item.id as keyof typeof dockIconNames]}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 
