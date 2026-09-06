@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Navbar } from "./components/navigation/Navbar";
+import { Navbar, NavigationDock } from "./components/navigation/Navbar";
 import { Hero } from "./sections/Hero/Hero";
 import { About } from "./sections/About/About";
 import { Experience } from "./sections/Experience/Experience";
@@ -30,6 +30,7 @@ export default function App() {
 
       <div className="app-shell">
         <Navbar />
+        <NavigationDock />
         <main>
           <Hero />
           <About />

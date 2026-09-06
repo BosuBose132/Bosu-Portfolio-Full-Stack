@@ -4,7 +4,7 @@
   height: 100%;
   min-height: 400px;
   overflow: hidden;
-  background: radial-gradient(ellipse at 74% 44%, rgba(25, 71, 125, 0.16), transparent 33%), radial-gradient(ellipse at 88% 72%, rgba(100, 46, 89, 0.1), transparent 30%), linear-gradient(90deg, rgba(2, 5, 10, 0.48), transparent 42%);
+  background: radial-gradient(ellipse at 73% 43%, rgba(29, 79, 133, 0.22), transparent 35%), radial-gradient(ellipse at 88% 69%, rgba(76, 106, 135, 0.09), transparent 28%), radial-gradient(ellipse at 52% 15%, rgba(34, 58, 97, 0.08), transparent 42%), linear-gradient(90deg, rgba(2, 5, 10, 0.76), rgba(2, 5, 10, 0.08) 60%, rgba(2, 5, 10, 0.2));
 }
 
 .sysscene::after {
@@ -12,7 +12,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse at 74% 40%, transparent 20%, rgba(2, 5, 10, 0.16) 78%);
+  background: radial-gradient(ellipse at 74% 40%, transparent 18%, rgba(2, 5, 10, 0.22) 82%);
 }
 
 .sysscene canvas {
@@ -26,11 +26,10 @@
 }
 
 .sysnode-label {
-  display: inline-block;
-  padding: 0.08rem 0.24rem;
-  color: rgba(234, 241, 249, 0.86);
-  background: rgba(7, 17, 31, 0.3);
-  border: 1px solid rgba(174, 185, 202, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: rgba(214, 234, 245, 0.8);
   font-family: var(--font-mono);
   font-size: 0.56rem;
   font-weight: 500;
@@ -39,12 +38,26 @@
   white-space: nowrap;
   user-select: none;
 }
+.sysnode-label::before {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(130, 214, 248, 0.86);
+  box-shadow: 0 0 7px rgba(94, 202, 245, 0.32);
+  content: "";
+}
+.sysnode-label::after {
+  width: 17px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(126, 204, 240, 0.58), transparent);
+  content: "";
+}
 
 .sysnode-label--secondary {
   color: rgba(182, 193, 208, 0.68);
   font-size: 0.48rem;
   letter-spacing: 0.05em;
-  opacity: 0.64;
+  opacity: 0.32;
 }
 
 .sysnode-label--amber { border-color: rgba(245, 158, 11, 0.38); }
@@ -57,5 +70,6 @@
   .sysscene { min-height: 260px; }
   .sysnode-label { font-size: 0.48rem; }
   .sysnode-label--secondary { font-size: 0.42rem; }
-  .sysscene { background: radial-gradient(ellipse at 65% 45%, rgba(25, 71, 125, 0.13), transparent 45%); }
+  .sysnode-label--secondary { display: none; }
+  .sysscene { background: radial-gradient(ellipse at 72% 45%, rgba(25, 71, 125, 0.13), transparent 45%), linear-gradient(90deg, rgba(2, 5, 10, 0.72), transparent); }
 }
