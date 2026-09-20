@@ -87,7 +87,7 @@ export const profile = {
   openToWork: true,
   theme: "From problem to production.",
   summary:
-    "Full Stack Software Engineer with 3+ years building scalable frontend and backend systems in Java and JavaScript across healthcare and enterprise environments. Strong foundation in data structures, algorithms, and system design, with hands-on experience deploying distributed applications on AWS and managing database-driven services with SQL and MongoDB.",
+    "Full Stack Software Engineer with over 4 years building scalable frontend and backend systems in Java and JavaScript across healthcare and enterprise environments. Strong foundation in data structures, algorithms, and system design, with hands-on experience deploying distributed applications on AWS and managing database-driven services with SQL and MongoDB.",
   heroDescription:
     "I build scalable web applications, AI-powered systems, and responsive user experiences using React, Java, Node.js, and cloud technologies.",
   profileImage: profileImg,
@@ -126,7 +126,7 @@ export const navItems: NavItem[] = [
 /* ------------------------------------------------------------------ */
 
 export const heroStats: Stat[] = [
-  { value: "3+", label: "Years Experience" },
+  { value: "4+", label: "Years Experience" },
   { value: "Full-Stack", label: "Frontend & Backend" },
   { value: "Java · JS", label: "Core Languages" },
   { value: "AWS", label: "Cloud Deployment" },
@@ -138,10 +138,10 @@ export const heroStats: Stat[] = [
 
 export const about = {
   intro:
-    "I'm a Full Stack Software Engineer and graduate student in Information Systems at Indiana Institute of Technology, focused on building modern, reliable, and meaningful web applications.",
+    "I'm a Full Stack Software Engineer with over 4 years of experience building scalable frontend and backend systems across healthcare and enterprise environments.",
   paragraphs: [
     "My work spans frontend and backend development with JavaScript, React, Node.js, Java, and Spring Boot, backed by relational and NoSQL databases. I enjoy pairing solid engineering with clean interface design so applications are both dependable and intuitive.",
-    "I've worked as a Software Development Intern at Medical Informatics Engineering and as a Software Engineer at Virtusa, gaining hands-on experience with distributed systems, AI-powered workflows, cloud deployment on AWS, and professional collaboration on real products.",
+    "As a Software Engineer at One Community Global, I build full-stack features, own RESTful APIs and Redis-backed query optimization, and help lead the engineering team through sprint planning, PR reviews, and mentoring. Earlier, at Medical Informatics Engineering and Virtusa, I built an AI-powered visitor registration system with OCR and computer vision, and developed enterprise Java and Spring Boot services for healthcare and banking platforms.",
   ],
   specialties: [
     "Full-Stack Engineering",
