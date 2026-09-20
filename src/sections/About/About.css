@@ -77,11 +77,11 @@
   height: auto;
   aspect-ratio: 10 / 11;
   object-fit: cover;
-  object-position: center 24%;
+  object-position: center 34%;
   border: 1px solid rgba(213, 238, 250, 0.14);
   filter: saturate(0.86) contrast(1.04);
-  transform: scale(1.1);
-  transform-origin: center 24%;
+  transform: scale(1.16);
+  transform-origin: center 34%;
 }
 .about__frame-corner {
   position: absolute;
@@ -134,7 +134,7 @@
   .about__intro { margin-top: var(--space-4); }
   .about__specialties-list { grid-template-columns: 1fr; }
   .about__portrait-img {
-    transform: scale(1.06);
+    transform: scale(1.1);
   }
 }
 @media (prefers-reduced-motion: reduce) { .about__specialty { transition: none; } }
