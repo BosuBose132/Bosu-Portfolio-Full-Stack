@@ -33,7 +33,8 @@ export interface ExperienceEntry {
   bullets: string[];
   metrics: { value: string; label: string }[];
   tech: string[];
-  icon: "hospital" | "building";
+  /* Short company initials shown on the timeline node */
+  monogram: string;
 }
 
 export interface EducationEntry {
@@ -159,64 +160,93 @@ export const about = {
 
 export const experience: ExperienceEntry[] = [
   {
+    id: "ocg",
+    role: "Software Engineer",
+    company: "One Community Global",
+    location: "San Gabriel, California",
+    start: "Jul 2026",
+    end: "Present",
+    period: "Jul 2026 – Present",
+    monogram: "OCG",
+    summary:
+      "Own full-stack feature delivery and engineering team leadership on a React and Node.js product built for scale.",
+    bullets: [
+      "Build full-stack features with React, Node.js, Express, MongoDB, and PostgreSQL, backing RESTful APIs that serve 1,000+ users and covering changes with Jest unit and integration tests.",
+      "Lead sprint planning and the technical roadmap, review frontend and backend pull requests, mentor developers, and coordinate production releases.",
+    ],
+    metrics: [
+      { value: "40%", label: "Latency reduction via query & Redis caching" },
+      { value: "100+", label: "PRs reviewed" },
+    ],
+    tech: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "PostgreSQL",
+      "Redis",
+      "REST APIs",
+      "Jest",
+    ],
+  },
+  {
     id: "mie",
-    role: "Software Development Intern",
+    role: "Software Developer",
     company: "Medical Informatics Engineering",
-    location: "Fort Wayne, IN",
+    location: "Fort Wayne, Indiana",
     start: "May 2025",
     end: "Dec 2025",
     period: "May 2025 – Dec 2025",
-    icon: "hospital",
+    monogram: "MIE",
     summary:
-      "Built an AI-powered visitor registration system that automates check-in across multiple locations using OCR, real-time processing, and responsive kiosk experiences.",
+      "Built an AI-powered visitor registration system spanning distributed backend services and real-time computer vision.",
     bullets: [
-      "Designed a distributed visitor registration system in JavaScript and Meteor.js processing 10,000+ monthly records, integrating AI-powered OCR to cut manual verification by 45% across multi-location deployments.",
-      "Structured backend validation workflows and optimized MongoDB query execution, reducing peak concurrency latency by 30% while strengthening data consistency under simultaneous kiosk submissions.",
-      "Managed cloud deployment on AWS EC2 with CI/CD automation, monitoring pipelines, and structured rollback strategies that improved release stability by 50%.",
+      "Built a distributed visitor registration system in JavaScript and Meteor.js, using OpenAI Vision and OCR for automated document extraction and check-in.",
+      "Trained a YOLOv8 model via Roboflow and ran it client-side with ONNX Runtime Web and WebAssembly, then shipped the React and SurveyJS interfaces through GitHub Actions CI/CD.",
     ],
     metrics: [
-      { value: "10,000+", label: "Monthly visitor records" },
-      { value: "45%", label: "Less manual verification" },
-      { value: "50%", label: "Better release stability" },
+      { value: "90%", label: "Faster visitor check-in" },
+      { value: "85%", label: "Object detection precision" },
     ],
     tech: [
       "JavaScript",
       "Meteor.js",
       "React",
-      "MongoDB",
+      "OpenAI Vision",
       "OCR",
-      "AWS EC2",
-      "CI/CD",
+      "YOLOv8",
+      "Roboflow",
+      "ONNX Runtime Web",
+      "WebAssembly",
+      "SurveyJS",
+      "GitHub Actions",
     ],
   },
   {
     id: "virtusa",
     role: "Software Engineer",
-    company: "Virtusa Consulting Services",
+    company: "Virtusa Consulting Services Private Limited",
     location: "Hyderabad, India",
     start: "Mar 2021",
     end: "May 2024",
     period: "Mar 2021 – May 2024",
-    icon: "building",
+    monogram: "VRT",
     summary:
-      "Developed scalable enterprise backend services and RESTful APIs for healthcare and banking workflows while improving performance, database efficiency, and release quality.",
+      "Developed enterprise Java and Spring Boot services for healthcare and banking workflows at production scale.",
     bullets: [
-      "Developed scalable backend services using Java, Spring Boot, and MVC design principles for healthcare and banking workflows, supporting 3+ business units and improving operational efficiency by 35%.",
-      "Engineered and optimized RESTful APIs for concurrent enterprise workflows, improving response time by 40% while reducing integration bottlenecks across dependent services.",
-      "Tuned relational schemas and MySQL query performance, decreasing reporting latency by 40%, and performed root-cause analysis that reduced regression defects by 20%.",
+      "Developed backend services and RESTful APIs in Java and Spring Boot using MVC design principles for enterprise healthcare and banking workflows.",
+      "Tuned MySQL schemas and queries, led production troubleshooting and system design discussions, and mentored engineers on best practices.",
     ],
     metrics: [
       { value: "40%", label: "Faster API response" },
-      { value: "35%", label: "Higher workflow efficiency" },
-      { value: "20%", label: "Fewer regression defects" },
+      { value: "35%", label: "Higher operational efficiency" },
     ],
     tech: [
       "Java",
       "Spring Boot",
+      "MVC",
       "REST APIs",
       "MySQL",
-      "MVC",
-      "AWS",
     ],
   },
 ];
